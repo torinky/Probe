@@ -11,6 +11,7 @@
  * @since     3.0.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\View;
 
 use Cake\View\View;
@@ -24,6 +25,9 @@ use Cake\View\View;
  */
 class AppView extends View
 {
+    // load vendor directory
+    //    public $layout = 'BootstrapUI.default';
+    public $layout = 'TwitterBootstrap/default';
 
     /**
      * Initialization hook method.
@@ -36,5 +40,10 @@ class AppView extends View
      */
     public function initialize()
     {
+
+        $this->loadHelper('Html', ['className' => 'BootstrapUI.Html']);
+        $this->loadHelper('Form', ['className' => 'BootstrapUI.Form']);
+        $this->loadHelper('Flash', ['className' => 'BootstrapUI.Flash']);
+        $this->loadHelper('Paginator', ['className' => 'BootstrapUI.Paginator']);
     }
 }

@@ -44,6 +44,9 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
+        //For CakaPHP 4.0
+        $this->RequestHandler->setConfig('enableBeforeRedirect',false);
+
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
