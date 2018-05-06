@@ -300,7 +300,7 @@ return [
         /**
          * The test connection is used during the test suite.
          */
-        'test' => [
+        'org_test' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
@@ -317,6 +317,18 @@ return [
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
             'url' => env('DATABASE_TEST_URL', null),
         ],
+
+        'test' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Sqlite',
+            'persistent' => false,
+            'username' => '',
+            'password' => '',
+            'database' => ROOT . DS . 'database' . DS . 'test_probe.sqlite',
+            'encoding' => 'utf8',
+            'cacheMetadata' => true,
+        ],
+
     ],
 
     /**
