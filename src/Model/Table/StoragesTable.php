@@ -1,5 +1,6 @@
 <?php
 namespace App\Model\Table;
+require(__DIR__ . '/../../../vendor/phpclasses/win-logical-drives/LogicalDrives.phpclass');
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -110,5 +111,27 @@ class StoragesTable extends Table
         $rules->add($rules->existsIn(['server_id'], 'Servers'));
 
         return $rules;
+    }
+
+    /**
+     * ローカルホストの情報からデフォルトセットを作る
+     * @return array(\App\Model\Entity\Storage)
+     */
+    public function getDefaultSet()
+    {
+        $data = [];
+        $ld = new \LogicalDrives ();
+        // Show assigned drive letters, with their label
+        // Note that the $ld object can be accessed as an array, providing the drive letter as an index
+        // (the drive letter can be followed by an optional semicolon and is not case-sensitive)
+//        debug("Assigned drives      :\n");
+
+        foreach ($ld->GetAssignedDrives() as $drive_letter) {
+            $storage = $this->newEntity();
+            $storage->name = $drive_letter;
+            $data[] = $storage;
+        }
+        return $data;
+
     }
 }

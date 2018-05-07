@@ -4,6 +4,7 @@ $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('tb_actions');
 ?>
     <li><?= $this->Html->link(__('New Server'), ['action' => 'add']); ?></li>
+<li><?= $this->Html->link(__('Init server data'), ['action' => 'setDefault']); ?></li>
     <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']); ?></li>
     <li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']); ?></li>
 <?php $this->end(); ?>

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-require(__DIR__ . '/../../vendor/phpclasses/win-logical-drives/LogicalDrives.phpclass');
+//require(__DIR__ . '/../../vendor/phpclasses/win-logical-drives/LogicalDrives.phpclass');
 
 /**
  * Servers Controller
@@ -24,27 +24,22 @@ class ServersController extends AppController
     public function index()
     {
 
-//        debug($_SERVER);
-        $host = gethostname();
-        $ip = gethostbyname($host);
-        debug($host);
-        debug($ip);
 
-        $ld = new \LogicalDrives ();
+        /*        $ld = new \LogicalDrives ();
 
-        // Show assigned drive letters, with their label
-        // Note that the $ld object can be accessed as an array, providing the drive letter as an index
-        // (the drive letter can be followed by an optional semicolon and is not case-sensitive)
-        debug("Assigned drives      :\n");
+                // Show assigned drive letters, with their label
+                // Note that the $ld object can be accessed as an array, providing the drive letter as an index
+                // (the drive letter can be followed by an optional semicolon and is not case-sensitive)
+                debug("Assigned drives      :\n");
 
-        foreach ($ld->GetAssignedDrives() as $drive_letter)
-            debug("\t$drive_letter ({$ld [ $drive_letter ] -> VolumeName})\n");
+                foreach ($ld->GetAssignedDrives() as $drive_letter)
+                    debug("\t$drive_letter ({$ld [ $drive_letter ] -> VolumeName})\n");
 
-        // Show unassigned drives
-        debug("Unassigned drives    : " . implode(', ', $ld->GetUnassignedDrives()) . "\n");
+                // Show unassigned drives
+                debug("Unassigned drives    : " . implode(', ', $ld->GetUnassignedDrives()) . "\n");
 
-        // Next available drive letter
-        debug("Next available drive : " . $ld->GetNextAVailableDrive() . "\n");
+                // Next available drive letter
+                debug("Next available drive : " . $ld->GetNextAVailableDrive() . "\n");*/
 
 
         $servers = $this->paginate($this->Servers);
@@ -130,5 +125,16 @@ class ServersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * デフォルトセットを保存する
+     */
+    public function setDefault()
+    {
+        $data = $this->Servers->getDefaultSet();
+        $this->Servers->save($data);
+
+        $this->setAction('index');
     }
 }

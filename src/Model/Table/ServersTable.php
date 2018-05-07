@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -82,8 +83,26 @@ class ServersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['id']));
+        $rules->add($rules->isUnique(['id']))
+            ->add($rules->isUnique(['name']))
+            ->add($rules->isUnique(['ip']));
 
         return $rules;
+    }
+
+    /**
+     * ローカルホストの情報からデフォルトデータを作る
+     * @return \App\Model\Entity\Server
+     */
+    public function getDefaultSet()
+    {
+        $data = $this->newEntity();
+        $data->name = gethostname();
+        $data->ip = gethostbyname($data->name);
+
+        $data->storages = $this->Storages->getDefaultSet();
+
+
+        return $data;
     }
 }
