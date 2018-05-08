@@ -22,7 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ServersTable extends Table
+class ServersTable extends ServersBaseTable
 {
 
     /**
@@ -83,26 +83,10 @@ class ServersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['id']))
-            ->add($rules->isUnique(['name']))
-            ->add($rules->isUnique(['ip']));
+        $rules = parent::buildRules($rules);
+
+        $rules->add($rules->isUnique(['id']));
 
         return $rules;
-    }
-
-    /**
-     * ローカルホストの情報からデフォルトデータを作る
-     * @return \App\Model\Entity\Server
-     */
-    public function getDefaultSet()
-    {
-        $data = $this->newEntity();
-        $data->name = gethostname();
-        $data->ip = gethostbyname($data->name);
-
-        $data->storages = $this->Storages->getDefaultSet();
-
-
-        return $data;
     }
 }
