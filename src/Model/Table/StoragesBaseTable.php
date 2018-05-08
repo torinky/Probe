@@ -43,6 +43,33 @@ class StoragesBaseTable extends Table
         foreach ($ld->GetAssignedDrives() as $drive_letter) {
             $storage = $this->newEntity();
             $storage->name = $drive_letter;
+
+            $directory = trim($drive_letter) . ':';
+            $storage->capacity = @disk_total_space($directory);
+            $storage->used_size = $storage->capacity - @disk_free_space($directory);
+
+            /*            $si_prefix = ['B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB'];
+                        $base = 1024;
+                        $path = '/';
+
+            //全体サイズ
+                        $total_bytes = disk_total_space($path);
+                        $class = min((int)log($total_bytes, $base), count($si_prefix) - 1);
+                        echo "全体サイズ:" . sprintf('%1.2f', $total_bytes / pow($base, $class)) . $si_prefix[$class] . "<br />";
+
+            //空き容量
+                        $free_bytes = disk_free_space($path);
+                        $class = min((int)log($free_bytes, $base), count($si_prefix) - 1);
+                        echo "空き容量:" . sprintf('%1.2f', $free_bytes / pow($base, $class)) . $si_prefix[$class] . "<br />";
+
+            //使用容量
+                        $used_bytes = $total_bytes - $free_bytes;
+                        $class = min((int)log($used_bytes, $base), count($si_prefix) - 1);
+                        echo "使用容量:" . sprintf('%1.2f', $used_bytes / pow($base, $class)) . $si_prefix[$class] . "<br />";
+
+            //使用率
+                        echo "使用率:" . round($used_bytes / $total_bytes * 100, 2) . "%<br />";*/
+
             $data[] = $storage;
         }
         return $data;
