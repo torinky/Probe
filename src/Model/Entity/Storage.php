@@ -22,7 +22,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Server $server
  */
-class Storage extends Entity
+class Storage extends StorageBasic
 {
 
     /**

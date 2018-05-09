@@ -14,6 +14,10 @@ $this->start('tb_actions');
         <tr>
             <th><?= $this->Paginator->sort('id'); ?></th>
             <th><?= $this->Paginator->sort('capacity'); ?></th>
+            <th><?= $this->Paginator->sort('used_size'); ?></th>
+            <th><?= $this->Paginator->sort('remain_size'); ?></th>
+            <th><?= __('') ?></th>
+            <th><?= __('Remain Size') ?></th>
             <th><?= $this->Paginator->sort('created'); ?></th>
             <th><?= $this->Paginator->sort('modified'); ?></th>
             <th><?= $this->Paginator->sort('limit_remain'); ?></th>
@@ -26,7 +30,9 @@ $this->start('tb_actions');
         <?php foreach ($storages as $storage): ?>
         <tr>
             <td><?= $this->Number->format($storage->id) ?></td>
-            <td><?= $this->Number->format($storage->capacity) ?></td>
+            <td><?= h($storage->capacityWithUnit) ?></td>
+            <td><?= h($storage->used_sizeWithUnit) ?></td>
+            <td><?= h($storage->remain_sizeWithUnit) ?></td>
             <td><?= h($storage->created) ?></td>
             <td><?= h($storage->modified) ?></td>
             <td><?= $this->Number->format($storage->limit_remain) ?></td>

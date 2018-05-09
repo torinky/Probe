@@ -73,12 +73,13 @@ $this->end();
                 <th><?= __('Place') ?></th>
                 <th><?= __('Memo') ?></th>
                 <th><?= __('Capacity') ?></th>
+                <th><?= __('Used Size') ?></th>
+                <th><?= __('Remain Size') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
                 <th><?= __('Limit Remain') ?></th>
                 <th><?= __('Files Count') ?></th>
                 <th><?= __('Directories Count') ?></th>
-                <th><?= __('Used Size') ?></th>
                 <th><?= __('Server Id') ?></th>
                 <th><?= __('Condition') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -91,13 +92,14 @@ $this->end();
                     <td><?= h($storages->name) ?></td>
                     <td><?= h($storages->place) ?></td>
                     <td><?= h($storages->memo) ?></td>
-                    <td><?= h($storages->capacity) ?></td>
+                    <td><?= h($storages->capacityWithUnit) ?></td>
+                    <td><?= h($storages->used_sizeWithUnit) ?></td>
+                    <td><?= h($storages->remain_sizeWithUnit) ?></td>
                     <td><?= h($storages->created) ?></td>
                     <td><?= h($storages->modified) ?></td>
                     <td><?= h($storages->limit_remain) ?></td>
                     <td><?= h($storages->files_count) ?></td>
                     <td><?= h($storages->directories_count) ?></td>
-                    <td><?= h($storages->used_size) ?></td>
                     <td><?= h($storages->server_id) ?></td>
                     <td><?= h($storages->condition) ?></td>
                     <td class="actions">

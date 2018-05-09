@@ -42,7 +42,15 @@ $this->end();
         </tr>
         <tr>
             <td><?= __('Capacity') ?></td>
-            <td><?= $this->Number->format($storage->capacity) ?></td>
+            <td><?= $storage->capacityWithUnit ?></td>
+        </tr>
+        <tr>
+            <td><?= __('Used Size') ?></td>
+            <td><?= $storage->used_sizeWithUnit ?></td>
+        </tr>
+        <tr>
+            <td><?= __('Remain Size') ?></td>
+            <td><?= $storage->remain_sizeWithUnit ?></td>
         </tr>
         <tr>
             <td><?= __('Limit Remain') ?></td>
