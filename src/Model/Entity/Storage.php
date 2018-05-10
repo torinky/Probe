@@ -19,10 +19,11 @@ use Cake\ORM\Entity;
  * @property int $used_size
  * @property int $server_id
  * @property bool $condition
+ * @property string $type
  *
  * @property \App\Model\Entity\Server $server
  */
-class Storage extends StorageBasic
+class Storage extends StorageBase
 {
 
     /**
@@ -47,6 +48,7 @@ class Storage extends StorageBasic
         'used_size' => true,
         'server_id' => true,
         'condition' => true,
+        'type' => true,
         'server' => true
     ];
 }

@@ -23,7 +23,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Server $server
  */
-class StorageBasic extends Entity
+class StorageBase extends Entity
 {
     const SI_PREFIX = ['B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB'];
     const BASE = 1024;

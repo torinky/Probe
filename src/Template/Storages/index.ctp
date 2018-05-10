@@ -13,6 +13,7 @@ $this->start('tb_actions');
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('id'); ?></th>
+            <th><?= $this->Paginator->sort('type'); ?></th>
             <th><?= $this->Paginator->sort('capacity'); ?></th>
             <th><?= $this->Paginator->sort('used_size'); ?></th>
             <th><?= $this->Paginator->sort('remain_size'); ?></th>
@@ -30,6 +31,7 @@ $this->start('tb_actions');
         <?php foreach ($storages as $storage): ?>
         <tr>
             <td><?= $this->Number->format($storage->id) ?></td>
+            <td><?= h($storage->type) ?></td>
             <td><?= h($storage->capacityWithUnit) ?></td>
             <td><?= h($storage->used_sizeWithUnit) ?></td>
             <td><?= h($storage->remain_sizeWithUnit) ?></td>

@@ -35,9 +35,10 @@ class ServersBaseTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules
-            ->add($rules->isUnique(['name']))
-            ->add($rules->isUnique(['ip']));
+//        追加しなければログにならない
+//        $rules
+//            ->add($rules->isUnique(['name']))
+//            ->add($rules->isUnique(['ip']));
 
         return $rules;
     }

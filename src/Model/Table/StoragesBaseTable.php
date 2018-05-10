@@ -45,9 +45,18 @@ class StoragesBaseTable extends Table
             $storage->name = $drive_letter;
 
             $directory = trim($drive_letter) . ':';
+
             $storage->capacity = @disk_total_space($directory);
+            if ($storage->capacity == 0) {
+                $storage->condition = false;
+            }
             $storage->used_size = $storage->capacity - @disk_free_space($directory);
-            debug($storage);
+//todo 総ファイル数
+            //todo 総ディレクトリ数
+
+            $storage->type = $ld [$drive_letter]->GetDriveType();
+//            debug($storage);
+//            debug($ld [ $drive_letter ]);
 
             $data[] = $storage;
         }

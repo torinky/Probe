@@ -94,6 +94,10 @@ class StoragesTable extends StoragesBaseTable
             ->boolean('condition')
             ->allowEmpty('condition');
 
+        $validator
+            ->scalar('type')
+            ->allowEmpty('type');
+
         return $validator;
     }
 
@@ -111,5 +115,4 @@ class StoragesTable extends StoragesBaseTable
 
         return $rules;
     }
-
 }
