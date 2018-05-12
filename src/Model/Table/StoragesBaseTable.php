@@ -33,6 +33,7 @@ class StoragesBaseTable extends Table
      */
     public function getDefaultSet()
     {
+
         $data = [];
         $ld = new \LogicalDrives ();
         // Show assigned drive letters, with their label
@@ -47,20 +48,64 @@ class StoragesBaseTable extends Table
             $directory = trim($drive_letter) . ':';
 
             $storage->capacity = @disk_total_space($directory);
-            if ($storage->capacity == 0) {
-                $storage->condition = false;
-            }
+            /*            if ($storage->capacity == 0) {
+                            $storage->condition = false;
+                        }*/
             $storage->used_size = $storage->capacity - @disk_free_space($directory);
 //todo 総ファイル数
             //todo 総ディレクトリ数
 
             $storage->type = $ld [$drive_letter]->GetDriveType();
+            $driveExt = new LogicalDriveConvert($ld [$drive_letter]);
+            $storage->condition = $driveExt->canAccess();
+//            debug($driveExt->GetAccess());
 //            debug($storage);
-//            debug($ld [ $drive_letter ]);
+//            debug($ld [$drive_letter]);
+//            debug($ld [$drive_letter]->Access);
 
             $data[] = $storage;
         }
         return $data;
 
     }
+}
+
+
+class LogicalDriveConvert
+{
+    private $drive;
+
+    public function __construct(\LogicalDrive $drive)
+    {
+        $this->drive = $drive;
+    }
+
+    public function GetAccess()
+    {
+        if (is_null($this->drive->Access)) {
+            return 'offline';
+        }
+        switch ($this->drive->Access) {
+            // Drive access types (Access property)
+            case    \LogicalDrive::DRIVE_ACCESS_UNKNOWN        :
+                return ("Unknown");
+            case    \LogicalDrive::DRIVE_ACCESS_READ    :
+                return ("Read");
+            case    \LogicalDrive::DRIVE_ACCESS_WRITE        :
+                return ("Write");
+            case    \LogicalDrive::DRIVE_ACCESS_WRITE_ONCE        :
+                return ("Write Once");
+            default                        :
+                return ("Unknown access type " . $this->drive->Access);
+        }
+    }
+
+    public function canAccess()
+    {
+        if (!isset($this->drive->Access) || is_null($this->drive->Access)) {
+            return false;
+        }
+        return true;
+    }
+
 }
