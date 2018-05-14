@@ -48,16 +48,18 @@ class StoragesBaseTable extends Table
             $directory = trim($drive_letter) . ':';
 
             $storage->capacity = @disk_total_space($directory);
-            /*            if ($storage->capacity == 0) {
-                            $storage->condition = false;
-                        }*/
             $storage->used_size = $storage->capacity - @disk_free_space($directory);
-//todo 総ファイル数
+
             //todo 総ディレクトリ数
 
             $storage->type = $ld [$drive_letter]->GetDriveType();
             $driveExt = new LogicalDriveConvert($ld [$drive_letter]);
             $storage->condition = $driveExt->canAccess();
+
+            //todo 総ファイル数
+            //ルートで使うと時間がかかり過ぎる
+//            debug($this->folderSize($directory.'/'));
+
 //            debug($driveExt->GetAccess());
 //            debug($storage);
 //            debug($ld [$drive_letter]);
@@ -68,6 +70,32 @@ class StoragesBaseTable extends Table
         return $data;
 
     }
+
+
+    /**
+     * ディレクトリのサイズとファイル数を得る
+     * ルートで使うと時間がかかり過ぎる
+     * @param $dir
+     * @return array
+     */
+    static public function folderSize($dir)
+    {
+        $size = 0;
+        $num = 0;
+        foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
+            if (is_file($each)) {
+                $size += filesize($each);
+                $num++;
+            } else {
+                $result = self::folderSize($each);
+                $size += $result['size'];
+                $num += $result['num'];
+//                $size += $this->folderSize($each);
+            }
+        }
+        return ['num' => $num, 'size' => $size];
+    }
+
 }
 
 
