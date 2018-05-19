@@ -23,7 +23,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Server $server
  */
-class StorageBase extends Entity
+class StoragesLogBase extends Entity
 {
     const SI_PREFIX = ['B', 'KB', 'MB', 'GB', 'TB', 'EB', 'ZB', 'YB'];
     const BASE = 1024;
@@ -41,7 +41,7 @@ class StorageBase extends Entity
      * @param int $bytes
      * @return string
      */
-    private function getMemorySizeWithUnit($bytes = 0)
+    static public function getMemorySizeWithUnit($bytes = 0)
     {
         if (empty($bytes)) {
             return '0';

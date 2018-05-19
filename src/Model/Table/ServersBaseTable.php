@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Servers Base Model
  *
+ * @property \App\Model\Table\ServersLogsTable|\Cake\ORM\Association\HasMany $ServersLogs
  * @property \App\Model\Table\StoragesTable|\Cake\ORM\Association\HasMany $Storages
  *
  * @method \App\Model\Entity\Server get($primaryKey, $options = [])
@@ -35,10 +36,9 @@ class ServersBaseTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-//        追加しなければログにならない
-//        $rules
-//            ->add($rules->isUnique(['name']))
-//            ->add($rules->isUnique(['ip']));
+        $rules
+            ->add($rules->isUnique(['name']))
+            ->add($rules->isUnique(['ip']));
 
         return $rules;
     }
@@ -50,12 +50,16 @@ class ServersBaseTable extends Table
     public function getDefaultSet()
     {
         $data = $this->newEntity();
+        /*        $data = $this->newEntity(null, [
+                    'associated' => ['Storages', 'ServersLogs']
+                ]);*/
         $data->name = gethostname();
         $data->ip = gethostbyname($data->name);
 
+        $data->servers_logs = [$this->ServersLogs->getDefaultSet($data->ip)];
         $data->storages = $this->Storages->getDefaultSet();
 
-
+//        debug($data);
         return $data;
     }
 }

@@ -18,6 +18,8 @@ $this->start('tb_actions');
     ?>
     </li>
     <li><?= $this->Html->link(__('List Servers'), ['action' => 'index']) ?></li>
+<li><?= $this->Html->link(__('List Servers Logs'), ['controller' => 'ServersLogs', 'action' => 'index']) ?> </li>
+<li><?= $this->Html->link(__('New Servers Log'), ['controller' => 'ServersLogs', 'action' => 'add']) ?> </li>
     <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']) ?> </li>
 <?php
@@ -35,6 +37,8 @@ $this->start('tb_sidebar');
     ?>
     </li>
     <li><?= $this->Html->link(__('List Servers'), ['action' => 'index']) ?></li>
+    <li><?= $this->Html->link(__('List Servers Logs'), ['controller' => 'ServersLogs', 'action' => 'index']) ?> </li>
+    <li><?= $this->Html->link(__('New Servers Log'), ['controller' => 'ServersLogs', 'action' => 'add']) ?> </li>
     <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']) ?> </li>
 </ul>
@@ -47,7 +51,7 @@ $this->end();
     <?php
     echo $this->Form->control('name');
     echo $this->Form->control('ip');
-    echo $this->Form->control('condition');
+    echo $this->Form->control('memo');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Save")); ?>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -7,22 +8,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Servers Model
+ * ServersLogs Model
  *
- * @property \App\Model\Table\ServersLogsTable|\Cake\ORM\Association\HasMany $ServersLogs
- * @property \App\Model\Table\StoragesTable|\Cake\ORM\Association\HasMany $Storages
+ * @property \App\Model\Table\ServersTable|\Cake\ORM\Association\BelongsTo $Servers
  *
- * @method \App\Model\Entity\Server get($primaryKey, $options = [])
- * @method \App\Model\Entity\Server newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Server[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Server|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Server patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Server[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Server findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\ServersLog get($primaryKey, $options = [])
+ * @method \App\Model\Entity\ServersLog newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\ServersLog[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\ServersLog|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\ServersLog patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\ServersLog[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\ServersLog findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ServersTable extends ServersBaseTable
+class ServersLogsTable extends ServersLogsBaseTable
 {
 
     /**
@@ -35,16 +35,13 @@ class ServersTable extends ServersBaseTable
     {
         parent::initialize($config);
 
-        $this->setTable('servers');
-        $this->setDisplayField('name');
+        $this->setTable('servers_logs');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('ServersLogs', [
-            'foreignKey' => 'server_id'
-        ]);
-        $this->hasMany('Storages', [
+        $this->belongsTo('Servers', [
             'foreignKey' => 'server_id'
         ]);
     }
@@ -63,16 +60,8 @@ class ServersTable extends ServersBaseTable
             ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('name')
-            ->allowEmpty('name');
-
-        $validator
-            ->scalar('ip')
-            ->allowEmpty('ip');
-
-        $validator
-            ->scalar('memo')
-            ->allowEmpty('memo');
+            ->boolean('condition')
+            ->allowEmpty('condition');
 
         return $validator;
     }
@@ -86,9 +75,8 @@ class ServersTable extends ServersBaseTable
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules = parent::buildRules($rules);
-
         $rules->add($rules->isUnique(['id']));
+        $rules->add($rules->existsIn(['server_id'], 'Servers'));
 
         return $rules;
     }

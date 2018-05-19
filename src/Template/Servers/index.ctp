@@ -5,6 +5,8 @@ $this->start('tb_actions');
 ?>
     <li><?= $this->Html->link(__('New Server'), ['action' => 'add']); ?></li>
 <li><?= $this->Html->link(__('Init server data'), ['action' => 'setDefault']); ?></li>
+<li><?= $this->Html->link(__('List ServersLogs'), ['controller' => 'ServersLogs', 'action' => 'index']); ?></li>
+<li><?= $this->Html->link(__('New Servers Log'), ['controller' => 'ServersLogs', 'action' => 'add']); ?></li>
     <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']); ?></li>
     <li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']); ?></li>
 <?php $this->end(); ?>
@@ -16,7 +18,6 @@ $this->start('tb_actions');
             <th><?= $this->Paginator->sort('id'); ?></th>
             <th><?= $this->Paginator->sort('created'); ?></th>
             <th><?= $this->Paginator->sort('modified'); ?></th>
-            <th><?= $this->Paginator->sort('condition'); ?></th>
             <th class="actions"><?= __('Actions'); ?></th>
         </tr>
     </thead>
@@ -26,7 +27,6 @@ $this->start('tb_actions');
             <td><?= $this->Number->format($server->id) ?></td>
             <td><?= h($server->created) ?></td>
             <td><?= h($server->modified) ?></td>
-            <td><?= h($server->condition) ?></td>
             <td class="actions">
                 <?= $this->Html->link('', ['action' => 'view', $server->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                 <?= $this->Html->link('', ['action' => 'edit', $server->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

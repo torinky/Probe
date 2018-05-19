@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-
 /**
  * Servers Controller
  *
@@ -40,7 +39,7 @@ class ServersController extends AppController
     public function view($id = null)
     {
         $server = $this->Servers->get($id, [
-            'contain' => ['Storages']
+            'contain' => ['ServersLogs', 'Storages']
         ]);
 
         $this->set('server', $server);
@@ -116,7 +115,14 @@ class ServersController extends AppController
     public function setDefault()
     {
         $data = $this->Servers->getDefaultSet();
-        $this->Servers->save($data);
+        $this->Servers->save($data, [
+            'associated' => [
+                'Storages' => [
+                    'associated' => ['StoragesLogs']
+                ],
+                'ServersLogs'
+            ]
+        ]);
 
         $this->setAction('index');
     }

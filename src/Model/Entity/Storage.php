@@ -10,20 +10,16 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $place
  * @property string $memo
- * @property int $capacity
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property int $limit_remain
- * @property int $files_count
- * @property int $directories_count
- * @property int $used_size
  * @property int $server_id
- * @property bool $condition
  * @property string $type
+ * @property bool $condition
  *
  * @property \App\Model\Entity\Server $server
+ * @property \App\Model\Entity\StoragesLog[] $storages_logs
  */
-class Storage extends StorageBase
+class Storage extends Entity
 {
 
     /**
@@ -39,16 +35,12 @@ class Storage extends StorageBase
         'name' => true,
         'place' => true,
         'memo' => true,
-        'capacity' => true,
         'created' => true,
         'modified' => true,
-        'limit_remain' => true,
-        'files_count' => true,
-        'directories_count' => true,
-        'used_size' => true,
         'server_id' => true,
-        'condition' => true,
         'type' => true,
-        'server' => true
+        'condition' => true,
+        'server' => true,
+        'storages_logs' => true
     ];
 }

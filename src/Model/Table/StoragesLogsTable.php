@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -7,22 +8,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Storages Model
+ * StoragesLogs Model
  *
- * @property \App\Model\Table\ServersTable|\Cake\ORM\Association\BelongsTo $Servers
- * @property \App\Model\Table\StoragesLogsTable|\Cake\ORM\Association\HasMany $StoragesLogs
+ * @property \App\Model\Table\StoragesTable|\Cake\ORM\Association\BelongsTo $Storages
  *
- * @method \App\Model\Entity\Storage get($primaryKey, $options = [])
- * @method \App\Model\Entity\Storage newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Storage[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Storage|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Storage patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Storage[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Storage findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\StoragesLog get($primaryKey, $options = [])
+ * @method \App\Model\Entity\StoragesLog newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\StoragesLog[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\StoragesLog|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\StoragesLog patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\StoragesLog[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\StoragesLog findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class StoragesTable extends StoragesBaseTable
+class StoragesLogsTable extends StoragesLogsBaseTable
 {
 
     /**
@@ -35,16 +35,13 @@ class StoragesTable extends StoragesBaseTable
     {
         parent::initialize($config);
 
-        $this->setTable('storages');
-        $this->setDisplayField('name');
+        $this->setTable('storages_logs');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Servers', [
-            'foreignKey' => 'server_id'
-        ]);
-        $this->hasMany('StoragesLogs', [
+        $this->belongsTo('Storages', [
             'foreignKey' => 'storage_id'
         ]);
     }
@@ -63,10 +60,6 @@ class StoragesTable extends StoragesBaseTable
             ->add('id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->scalar('name')
-            ->allowEmpty('name');
-
-        $validator
             ->scalar('place')
             ->allowEmpty('place');
 
@@ -75,12 +68,32 @@ class StoragesTable extends StoragesBaseTable
             ->allowEmpty('memo');
 
         $validator
-            ->scalar('type')
-            ->allowEmpty('type');
+            ->integer('capacity')
+            ->allowEmpty('capacity');
+
+        $validator
+            ->integer('limit_remain')
+            ->allowEmpty('limit_remain');
+
+        $validator
+            ->integer('files_count')
+            ->allowEmpty('files_count');
+
+        $validator
+            ->integer('directories_count')
+            ->allowEmpty('directories_count');
+
+        $validator
+            ->integer('used_size')
+            ->allowEmpty('used_size');
 
         $validator
             ->boolean('condition')
             ->allowEmpty('condition');
+
+        $validator
+            ->scalar('type')
+            ->allowEmpty('type');
 
         return $validator;
     }
@@ -95,7 +108,7 @@ class StoragesTable extends StoragesBaseTable
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['id']));
-        $rules->add($rules->existsIn(['server_id'], 'Servers'));
+        $rules->add($rules->existsIn(['storage_id'], 'Storages'));
 
         return $rules;
     }

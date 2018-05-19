@@ -38,7 +38,7 @@ class StoragesController extends AppController
     public function view($id = null)
     {
         $storage = $this->Storages->get($id, [
-            'contain' => ['Servers']
+            'contain' => ['Servers', 'StoragesLogs']
         ]);
 
         $this->set('storage', $storage);
@@ -52,8 +52,8 @@ class StoragesController extends AppController
     public function add()
     {
         $storage = $this->Storages->newEntity();
-        if ($this->getRequest()->is('post')) {
-            $storage = $this->Storages->patchEntity($storage, $this->getRequest()->getData());
+        if ($this->request->is('post')) {
+            $storage = $this->Storages->patchEntity($storage, $this->request->getData());
             if ($this->Storages->save($storage)) {
                 $this->Flash->success(__('The storage has been saved.'));
 
@@ -77,8 +77,8 @@ class StoragesController extends AppController
         $storage = $this->Storages->get($id, [
             'contain' => []
         ]);
-        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $storage = $this->Storages->patchEntity($storage, $this->getRequest()->getData());
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $storage = $this->Storages->patchEntity($storage, $this->request->getData());
             if ($this->Storages->save($storage)) {
                 $this->Flash->success(__('The storage has been saved.'));
 
@@ -99,7 +99,7 @@ class StoragesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->getRequest()->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $storage = $this->Storages->get($id);
         if ($this->Storages->delete($storage)) {
             $this->Flash->success(__('The storage has been deleted.'));

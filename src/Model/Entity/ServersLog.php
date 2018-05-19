@@ -1,22 +1,20 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
 /**
- * Server Entity
+ * ServersLog Entity
  *
  * @property int $id
- * @property string $name
- * @property string $ip
- * @property string $memo
+ * @property int $server_id
  * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property bool $condition
  *
- * @property \App\Model\Entity\ServersLog[] $servers_logs
- * @property \App\Model\Entity\Storage[] $storages
+ * @property \App\Model\Entity\Server $server
  */
-class Server extends Entity
+class ServersLog extends Entity
 {
 
     /**
@@ -29,12 +27,9 @@ class Server extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'ip' => true,
-        'memo' => true,
+        'server_id' => true,
         'created' => true,
-        'modified' => true,
-        'servers_logs' => true,
-        'storages' => true
+        'condition' => true,
+        'server' => true
     ];
 }

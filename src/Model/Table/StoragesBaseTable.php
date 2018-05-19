@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Storages Model
  *
  * @property \App\Model\Table\ServersTable|\Cake\ORM\Association\BelongsTo $Servers
+ * @property \App\Model\Table\StoragesLogsTable|\Cake\ORM\Association\HasMany $StoragesLogs
  *
  * @method \App\Model\Entity\Storage get($primaryKey, $options = [])
  * @method \App\Model\Entity\Storage newEntity($data = null, array $options = [])
@@ -43,27 +44,13 @@ class StoragesBaseTable extends Table
 
         foreach ($ld->GetAssignedDrives() as $drive_letter) {
             $storage = $this->newEntity();
+            /*            $storage = $this->newEntity(null,[
+                            'associated' => ['StorgesLogs']
+                        ]);*/
             $storage->name = $drive_letter;
-
-            $directory = trim($drive_letter) . ':';
-
-            $storage->capacity = @disk_total_space($directory);
-            $storage->used_size = $storage->capacity - @disk_free_space($directory);
-
-            //todo 総ディレクトリ数
-
             $storage->type = $ld [$drive_letter]->GetDriveType();
-            $driveExt = new LogicalDriveConvert($ld [$drive_letter]);
-            $storage->condition = $driveExt->canAccess();
 
-            //todo 総ファイル数
-            //ルートで使うと時間がかかり過ぎる
-//            debug($this->folderSize($directory.'/'));
-
-//            debug($driveExt->GetAccess());
-//            debug($storage);
-//            debug($ld [$drive_letter]);
-//            debug($ld [$drive_letter]->Access);
+            $storage->storages_logs = [$this->StoragesLogs->getDefaultset($ld [$drive_letter])];
 
             $data[] = $storage;
         }
@@ -71,69 +58,5 @@ class StoragesBaseTable extends Table
 
     }
 
-
-    /**
-     * ディレクトリのサイズとファイル数を得る
-     * ルートで使うと時間がかかり過ぎる
-     * @param $dir
-     * @return array
-     */
-    static public function folderSize($dir)
-    {
-        $size = 0;
-        $num = 0;
-        foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
-            if (is_file($each)) {
-                $size += filesize($each);
-                $num++;
-            } else {
-                $result = self::folderSize($each);
-                $size += $result['size'];
-                $num += $result['num'];
-//                $size += $this->folderSize($each);
-            }
-        }
-        return ['num' => $num, 'size' => $size];
-    }
-
-}
-
-
-class LogicalDriveConvert
-{
-    private $drive;
-
-    public function __construct(\LogicalDrive $drive)
-    {
-        $this->drive = $drive;
-    }
-
-    public function GetAccess()
-    {
-        if (is_null($this->drive->Access)) {
-            return 'offline';
-        }
-        switch ($this->drive->Access) {
-            // Drive access types (Access property)
-            case    \LogicalDrive::DRIVE_ACCESS_UNKNOWN        :
-                return ("Unknown");
-            case    \LogicalDrive::DRIVE_ACCESS_READ    :
-                return ("Read");
-            case    \LogicalDrive::DRIVE_ACCESS_WRITE        :
-                return ("Write");
-            case    \LogicalDrive::DRIVE_ACCESS_WRITE_ONCE        :
-                return ("Write Once");
-            default                        :
-                return ("Unknown access type " . $this->drive->Access);
-        }
-    }
-
-    public function canAccess()
-    {
-        if (!isset($this->drive->Access) || is_null($this->drive->Access)) {
-            return false;
-        }
-        return true;
-    }
 
 }
