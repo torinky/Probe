@@ -62,4 +62,23 @@ class ServersBaseTable extends Table
 //        debug($data);
         return $data;
     }
+
+    public function addLogs($serverId = 0)
+    {
+        $targetQuery = $this->find()->where([
+            'name' => gethostname()
+        ]);
+        $target = $targetQuery->first();
+        if (is_null($target)) {
+            return false;
+        }
+
+        $serverLogData = $this->ServersLogs->getDefaultSet($target->ip);
+        $serverLogData->server_id = $target->id;
+        $this->ServersLogs->save($serverLogData);
+
+        $this->Storages->addLogs($target->id);
+
+    }
+
 }

@@ -126,4 +126,10 @@ class ServersController extends AppController
 
         $this->setAction('index');
     }
+
+    public function updateLog()
+    {
+        $this->Servers->addLogs();
+        $this->setAction('index');
+    }
 }

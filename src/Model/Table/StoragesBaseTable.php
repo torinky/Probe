@@ -52,11 +52,40 @@ class StoragesBaseTable extends Table
 
             $storage->storages_logs = [$this->StoragesLogs->getDefaultset($ld [$drive_letter])];
 
-            $data[] = $storage;
+            $data[$drive_letter] = $storage;
         }
         return $data;
 
     }
 
+    public function addLogs($serverId = 0)
+    {
+        $targetQuery = $this->find()->where([
+            'server_id' => $serverId
+        ]);
+        $targets = $targetQuery->all();
+//        debug($targetQuery);
+//        debug($target);
+        if (is_null($targets)) {
+            return false;
+        }
 
+        $data = [];
+        $ld = new \LogicalDrives ();
+
+        foreach ($targets as $tKey => $target) {
+//            debug($target);
+//            debug($target->name);
+            if (isset($ld[$target->name])) {
+                $temp = $this->StoragesLogs->getDefaultset($ld [$target->name]);
+                $temp->storage_id = $target->id;
+                $data[] = $temp;
+            }
+
+        }
+//        debug($data);
+        $this->StoragesLogs->saveMany($data);
+
+
+    }
 }

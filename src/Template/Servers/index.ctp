@@ -3,26 +3,27 @@
 $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('tb_actions');
 ?>
-    <li><?= $this->Html->link(__('New Server'), ['action' => 'add']); ?></li>
-<li><?= $this->Html->link(__('Init server data'), ['action' => 'setDefault']); ?></li>
+<li><?= $this->Html->link(__('New Server'), ['action' => 'add']); ?></li>
+<li><?= $this->Html->link(__('Init Server Data'), ['action' => 'setDefault']); ?></li>
+<li><?= $this->Html->link(__('Update Server Data'), ['action' => 'updateLog']); ?></li>
 <li><?= $this->Html->link(__('List ServersLogs'), ['controller' => 'ServersLogs', 'action' => 'index']); ?></li>
 <li><?= $this->Html->link(__('New Servers Log'), ['controller' => 'ServersLogs', 'action' => 'add']); ?></li>
-    <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']); ?></li>
-    <li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']); ?></li>
+<li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']); ?></li>
+<li><?= $this->Html->link(__('New Storage'), ['controller' => 'Storages', 'action' => 'add']); ?></li>
 <?php $this->end(); ?>
 <?php $this->assign('tb_sidebar', '<ul class="nav nav-sidebar">' . $this->fetch('tb_actions') . '</ul>'); ?>
 
 <table class="table table-striped" cellpadding="0" cellspacing="0">
     <thead>
-        <tr>
-            <th><?= $this->Paginator->sort('id'); ?></th>
-            <th><?= $this->Paginator->sort('created'); ?></th>
-            <th><?= $this->Paginator->sort('modified'); ?></th>
-            <th class="actions"><?= __('Actions'); ?></th>
-        </tr>
+    <tr>
+        <th><?= $this->Paginator->sort('id'); ?></th>
+        <th><?= $this->Paginator->sort('created'); ?></th>
+        <th><?= $this->Paginator->sort('modified'); ?></th>
+        <th class="actions"><?= __('Actions'); ?></th>
+    </tr>
     </thead>
     <tbody>
-        <?php foreach ($servers as $server): ?>
+    <?php foreach ($servers as $server): ?>
         <tr>
             <td><?= $this->Number->format($server->id) ?></td>
             <td><?= h($server->created) ?></td>
@@ -33,7 +34,7 @@ $this->start('tb_actions');
                 <?= $this->Form->postLink('', ['action' => 'delete', $server->id], ['confirm' => __('Are you sure you want to delete # {0}?', $server->id), 'title' => __('Delete'), 'class' => 'btn btn-default glyphicon glyphicon-trash']) ?>
             </td>
         </tr>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
     </tbody>
 </table>
 <div class="paginator">

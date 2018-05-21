@@ -71,7 +71,7 @@ class StoragesLogBase extends Entity
     /**
      * @return float|int
      */
-    protected function _getUseRate()
+    protected function _getUseRatio()
     {
         if (empty($this->_properties['capacity'])) {
             return 0;
