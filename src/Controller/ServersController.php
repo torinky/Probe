@@ -129,7 +129,9 @@ class ServersController extends AppController
 
     public function updateLog()
     {
-        $this->Servers->addLogs();
+        if ($this->Servers->addLogs() === false) {
+            $this->setAction('setDefault');
+        }
         $this->setAction('index');
     }
 }

@@ -63,10 +63,12 @@ class ServersBaseTable extends Table
         return $data;
     }
 
-    public function addLogs($serverId = 0)
+    public function addLogs()
     {
+        $name = gethostname();
         $targetQuery = $this->find()->where([
-            'name' => gethostname()
+            'name' => $name,
+            'ip' => gethostbyname($name),
         ]);
         $target = $targetQuery->first();
         if (is_null($target)) {
