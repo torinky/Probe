@@ -41,10 +41,12 @@ class ServersShell extends Shell
         $this->out($this->OptionParser->help());
     }
 
-    public function update()
+    public function updateLog()
     {
-        $data = $this->Servers->getDefaultSet();
-        $this->Servers->save($data);
-
+        if ($this->Servers->addLogs() === false) {
+            $data = $this->Servers->getDefaultSet();
+            $this->Servers->save($data);
+        }
     }
+
 }
