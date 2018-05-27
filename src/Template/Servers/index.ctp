@@ -48,7 +48,7 @@ $this->start('tb_actions');
 <?php
 
 //$this->prepend('script', $this->Html->script(['node_modules/chart.js/dist/Chart.bundle.min.js']));
-echo $this->Html->script(['node_modules/chart.js/dist/Chart.bundle.min.js']);
+echo $this->Html->script(['../node_modules/chart.js/dist/Chart.bundle.min.js']);
 ?>
 
 <canvas id="myChart" width="400" height="400"></canvas>
