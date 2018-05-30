@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,27 +11,36 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title><?= $this->fetch('title') ?></title>
     <!-- Favicon-->
-    <link rel="icon" href="../node_modules/adminbsb-materialdesign/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/node_modules/adminbsb-materialdesign/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
 <!--    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">-->
-    <link rel="stylesheet" href="../iconfont/material-icons.css">
+    <!--    <link rel="stylesheet" href="../iconfont/material-icons.css">-->
 
     <!-- Bootstrap Core Css -->
-    <link href="../node_modules/adminbsb-materialdesign/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!--    <link href="../node_modules/adminbsb-materialdesign/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">-->
 
     <!-- Waves Effect Css -->
-    <link href="../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.css" rel="stylesheet" />
+    <!--    <link href="../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.css" rel="stylesheet" />-->
 
     <!-- Animation Css -->
-    <link href="../node_modules/adminbsb-materialdesign/plugins/animate-css/animate.css" rel="stylesheet" />
+    <!--    <link href="../node_modules/adminbsb-materialdesign/plugins/animate-css/animate.css" rel="stylesheet" />-->
 
     <!-- Custom Css -->
-    <link href="../node_modules/adminbsb-materialdesign/css/style.css" rel="stylesheet">
+    <!--    <link href="../node_modules/adminbsb-materialdesign/css/style.css" rel="stylesheet">-->
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="../node_modules/adminbsb-materialdesign/css/themes/all-themes.css" rel="stylesheet" />
+    <!--    <link href="../node_modules/adminbsb-materialdesign/css/themes/all-themes.css" rel="stylesheet" />-->
+
+    <?= $this->Html->css([
+        '/iconfont/material-icons.css',
+        '/node_modules/adminbsb-materialdesign/plugins/bootstrap/css/bootstrap.css',
+        '/node_modules/adminbsb-materialdesign/plugins/node-waves/waves.css',
+        '/node_modules/adminbsb-materialdesign/plugins/animate-css/animate.css',
+        '/node_modules/adminbsb-materialdesign/css/style.css',
+        '/node_modules/adminbsb-materialdesign/css/themes/all-themes.css',
+    ]) ?>
 </head>
 
 <body class="theme-red">
@@ -80,16 +94,6 @@
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <?= $this->fetch('leftSideBar') ?>
-        <!-- Footer -->
-        <div class="legal">
-            <div class="copyright">
-                &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
-            </div>
-            <div class="version">
-                <b>Version: </b> 1.0.5
-            </div>
-        </div>
-        <!-- #Footer -->
     </aside>
     <!-- #END# Left Sidebar -->
     <!-- Right Sidebar -->
@@ -108,25 +112,37 @@
 </section>
 
 <!-- Jquery Core Js -->
-<script src="../node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js"></script>-->
 
 <!-- Bootstrap Core Js -->
-<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js"></script>-->
 
 <!-- Select Plugin Js -->
-<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>-->
 
 <!-- Slimscroll Plugin Js -->
-<script src="../node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>-->
 
 <!-- Waves Effect Plugin Js -->
-<script src="../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js"></script>-->
 
 <!-- Custom Js -->
-<script src="../node_modules/adminbsb-materialdesign/js/admin.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/js/admin.js"></script>-->
 
 <!-- Demo Js -->
-<script src="../node_modules/adminbsb-materialdesign/js/demo.js"></script>
+<!--<script src="../node_modules/adminbsb-materialdesign/js/demo.js"></script>-->
+
+<?=
+$this->Html->script([
+    "/node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js",
+    "/node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js",
+    "/node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js",
+    "/node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js",
+    "/node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js",
+    "/node_modules/adminbsb-materialdesign/js/admin.js",
+    "/node_modules/adminbsb-materialdesign/js/demo.js",
+])
+?>
 </body>
 
 </html>

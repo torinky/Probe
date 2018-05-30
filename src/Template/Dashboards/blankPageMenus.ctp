@@ -9,39 +9,246 @@
  * @var \App\View\AppView $this
  */
 
+/*debug(\Cake\Core\Configure::read('App.base'));
+debug(\Cake\Core\Configure::read('App.fullBaseUrl'));
+debug(\Cake\Core\Configure::read('App.baseUrl'));
+debug(\Cake\Core\Configure::read('App.webroot'));*/
 ?>
 
 <?php $this->start('topBar') ?>
+
 <ul class="nav navbar-nav navbar-right">
     <!-- Call Search -->
     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
     <!-- #END# Call Search -->
-
-    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+    <!-- Notifications -->
+    <li class="dropdown">
+        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+            <i class="material-icons">notifications</i>
+            <span class="label-count">7</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header">NOTIFICATIONS</li>
+            <li class="body">
+                <ul class="menu">
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-light-green">
+                                <i class="material-icons">person_add</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4>12 new members joined</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 14 mins ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-cyan">
+                                <i class="material-icons">add_shopping_cart</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4>4 sales made</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 22 mins ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-red">
+                                <i class="material-icons">delete_forever</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 3 hours ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-orange">
+                                <i class="material-icons">mode_edit</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4><b>Nancy</b> changed name</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 2 hours ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-blue-grey">
+                                <i class="material-icons">comment</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4><b>John</b> commented your post</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 4 hours ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-light-green">
+                                <i class="material-icons">cached</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4><b>John</b> updated status</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> 3 hours ago
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <div class="icon-circle bg-purple">
+                                <i class="material-icons">settings</i>
+                            </div>
+                            <div class="menu-info">
+                                <h4>Settings updated</h4>
+                                <p>
+                                    <i class="material-icons">access_time</i> Yesterday
+                                </p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="footer">
+                <a href="javascript:void(0);">View All Notifications</a>
+            </li>
+        </ul>
+    </li>
+    <!-- #END# Notifications -->
+    <!-- Tasks -->
+    <li class="dropdown">
+        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+            <i class="material-icons">flag</i>
+            <span class="label-count">9</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header">TASKS</li>
+            <li class="body">
+                <ul class="menu tasks">
+                    <li>
+                        <a href="javascript:void(0);">
+                            <h4>
+                                Footer display issue
+                                <small>32%</small>
+                            </h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <h4>
+                                Make new buttons
+                                <small>45%</small>
+                            </h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <h4>
+                                Create new dashboard
+                                <small>54%</small>
+                            </h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <h4>
+                                Solve transition issue
+                                <small>65%</small>
+                            </h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <h4>
+                                Answer GitHub questions
+                                <small>92%</small>
+                            </h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="footer">
+                <a href="javascript:void(0);">View All Tasks</a>
+            </li>
+        </ul>
+    </li>
+    <!-- #END# Tasks -->
+    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                    class="material-icons">more_vert</i></a></li>
 </ul>
+
 <?php $this->end() ?>
 
 
 <?php $this->start('leftSideBar') ?>
 
+<!-- User Info -->
+<div class="user-info">
+    <div class="image">
+        <img src="../node_modules/adminbsb-materialdesign/images/user.png" width="48" height="48" alt="User"/>
+    </div>
+    <div class="info-container">
+        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+        <div class="email">john.doe@example.com</div>
+        <div class="btn-group user-helper-dropdown">
+            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                <li role="seperator" class="divider"></li>
+                <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
+                <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
+                <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                <li role="seperator" class="divider"></li>
+                <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- #User Info -->
 <!-- Menu -->
-<div class="menu" style="overflow-y:hidden;">
+<div class="menu">
     <ul class="list">
         <li class="header">MAIN NAVIGATION</li>
-        <li>
-            <?=
-            $this->Html->link('<i class="fa fa-server"></i><span>Servers</span>', [
-                'action' => 'servers'
-            ], ['escape' => false])
-            ?>
-        </li>
-        <li>
-            <?=
-            $this->Html->link('<i class="fa fa-hdd"></i><span>Storages</span>', [
-                'action' => 'servers'
-            ], ['escape' => false])
-            ?>
-        </li>
         <li>
             <a href="../node_modules/adminbsb-materialdesign/index.html">
                 <i class="material-icons">home</i>
@@ -78,7 +285,8 @@
                             <a href="../node_modules/adminbsb-materialdesign/pages/widgets/cards/colored.html">Colored</a>
                         </li>
                         <li>
-                            <a href="../node_modules/adminbsb-materialdesign/pages/widgets/cards/no-header.html">No Header</a>
+                            <a href="../node_modules/adminbsb-materialdesign/pages/widgets/cards/no-header.html">No
+                                Header</a>
                         </li>
                     </ul>
                 </li>
@@ -168,7 +376,8 @@
                     <a href="../node_modules/adminbsb-materialdesign/pages/ui/range-sliders.html">Range Sliders</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/ui/sortable-nestable.html">Sortable & Nestable</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/ui/sortable-nestable.html">Sortable &
+                        Nestable</a>
                 </li>
                 <li>
                     <a href="../node_modules/adminbsb-materialdesign/pages/ui/tabs.html">Tabs</a>
@@ -177,7 +386,8 @@
                     <a href="../node_modules/adminbsb-materialdesign/pages/ui/thumbnails.html">Thumbnails</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/ui/tooltips-popovers.html">Tooltips & Popovers</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/ui/tooltips-popovers.html">Tooltips &
+                        Popovers</a>
                 </li>
                 <li>
                     <a href="../node_modules/adminbsb-materialdesign/pages/ui/waves.html">Waves</a>
@@ -191,16 +401,19 @@
             </a>
             <ul class="ml-menu">
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/basic-form-elements.html">Basic Form Elements</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/basic-form-elements.html">Basic Form
+                        Elements</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/advanced-form-elements.html">Advanced Form Elements</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/advanced-form-elements.html">Advanced
+                        Form Elements</a>
                 </li>
                 <li>
                     <a href="../node_modules/adminbsb-materialdesign/pages/forms/form-examples.html">Form Examples</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/form-validation.html">Form Validation</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/forms/form-validation.html">Form
+                        Validation</a>
                 </li>
                 <li>
                     <a href="../node_modules/adminbsb-materialdesign/pages/forms/form-wizard.html">Form Wizard</a>
@@ -220,10 +433,12 @@
                     <a href="../node_modules/adminbsb-materialdesign/pages/tables/normal-tables.html">Normal Tables</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/tables/jquery-datatable.html">Jquery Datatables</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/tables/jquery-datatable.html">Jquery
+                        Datatables</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/tables/editable-table.html">Editable Tables</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/tables/editable-table.html">Editable
+                        Tables</a>
                 </li>
             </ul>
         </li>
@@ -277,7 +492,8 @@
                     <a href="../node_modules/adminbsb-materialdesign/pages/examples/sign-up.html">Sign Up</a>
                 </li>
                 <li>
-                    <a href="../node_modules/adminbsb-materialdesign/pages/examples/forgot-password.html">Forgot Password</a>
+                    <a href="../node_modules/adminbsb-materialdesign/pages/examples/forgot-password.html">Forgot
+                        Password</a>
                 </li>
                 <li class="active">
                     <a href="../node_modules/adminbsb-materialdesign/pages/examples/blank.html">Blank Page</a>
@@ -377,16 +593,23 @@
     </ul>
 </div>
 <!-- #Menu -->
+<!-- Footer -->
+<div class="legal">
+    <div class="copyright">
+        &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+    </div>
+    <div class="version">
+        <b>Version: </b> 1.0.5
+    </div>
+</div>
+<!-- #Footer -->
 <?php $this->end(); ?>
-
-
-
 
 <?php $this->start('rightSideBar') ?>
 
 <ul class="nav nav-tabs tab-nav-right" role="tablist">
     <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
-    <!--    <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>-->
+    <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
 </ul>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
@@ -472,6 +695,55 @@
                 <span>Black</span>
             </li>
         </ul>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="settings">
+        <div class="demo-settings">
+            <p>GENERAL SETTINGS</p>
+            <ul class="setting-list">
+                <li>
+                    <span>Report Panel Usage</span>
+                    <div class="switch">
+                        <label><input type="checkbox" checked><span class="lever"></span></label>
+                    </div>
+                </li>
+                <li>
+                    <span>Email Redirect</span>
+                    <div class="switch">
+                        <label><input type="checkbox"><span class="lever"></span></label>
+                    </div>
+                </li>
+            </ul>
+            <p>SYSTEM SETTINGS</p>
+            <ul class="setting-list">
+                <li>
+                    <span>Notifications</span>
+                    <div class="switch">
+                        <label><input type="checkbox" checked><span class="lever"></span></label>
+                    </div>
+                </li>
+                <li>
+                    <span>Auto Updates</span>
+                    <div class="switch">
+                        <label><input type="checkbox" checked><span class="lever"></span></label>
+                    </div>
+                </li>
+            </ul>
+            <p>ACCOUNT SETTINGS</p>
+            <ul class="setting-list">
+                <li>
+                    <span>Offline</span>
+                    <div class="switch">
+                        <label><input type="checkbox"><span class="lever"></span></label>
+                    </div>
+                </li>
+                <li>
+                    <span>Location Permission</span>
+                    <div class="switch">
+                        <label><input type="checkbox" checked><span class="lever"></span></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
