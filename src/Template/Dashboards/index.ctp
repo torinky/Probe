@@ -11,7 +11,7 @@
 
 $this->extend('/Dashboards/menus');
 
-$title='test';
+$title='Probe';
 $resetUrl=\Cake\Routing\Router::url([
     'action'=>'index',
     'controller'=>'dashboards',

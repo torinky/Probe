@@ -30,14 +30,14 @@
         <li class="header">MAIN NAVIGATION</li>
         <li>
             <?=
-            $this->Html->link('<i class="fa fa-server"></i><span>Servers</span>', [
+            $this->Html->link('<i class="fas fa-server fa-lg"></i><span>Servers</span>', [
                 'action' => 'servers'
             ], ['escape' => false])
             ?>
         </li>
         <li>
             <?=
-            $this->Html->link('<i class="fa fa-hdd"></i><span>Storages</span>', [
+            $this->Html->link('<i class="fa fa-hdd fa-lg"></i><span>Storages</span>', [
                 'action' => 'servers'
             ], ['escape' => false])
             ?>

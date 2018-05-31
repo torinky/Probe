@@ -14,8 +14,8 @@
     <link rel="icon" href="/node_modules/adminbsb-materialdesign/favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-<!--    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
-<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">-->
+    <!--    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
+    <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">-->
     <!--    <link rel="stylesheet" href="../iconfont/material-icons.css">-->
 
     <!-- Bootstrap Core Css -->
@@ -40,6 +40,7 @@
         '/node_modules/adminbsb-materialdesign/plugins/animate-css/animate.css',
         '/node_modules/adminbsb-materialdesign/css/style.css',
         '/node_modules/adminbsb-materialdesign/css/themes/all-themes.css',
+        'dashboard',
     ]) ?>
 </head>
 
@@ -79,9 +80,10 @@
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+            <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+               data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-<!--            <a class="navbar-brand" href="../node_modules/adminbsb-materialdesign/index.html">ADMINBSB - MATERIAL DESIGN</a>-->
+            <!--            <a class="navbar-brand" href="../node_modules/adminbsb-materialdesign/index.html">ADMINBSB - MATERIAL DESIGN</a>-->
             <a class="navbar-brand" href="<?= $this->fetch('resetUrl') ?>"><?= $this->fetch('title') ?></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -134,6 +136,7 @@
 
 <?=
 $this->Html->script([
+    'fontawesome-all.min.js',
     "/node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js",
     "/node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js",
     "/node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js",
