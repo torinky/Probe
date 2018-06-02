@@ -7,7 +7,6 @@
  */
 
 namespace App\Controller;
-use App\Controller\AppController;
 
 /**
  * Servers Controller
@@ -21,6 +20,11 @@ use App\Controller\AppController;
 class DashboardsController extends AppController
 {
     public function index()
+    {
+        $this->setAction('server');
+    }
+
+    public function server()
     {
         // レイアウトの設定
         $this->viewBuilder()->setLayout('dashboard');

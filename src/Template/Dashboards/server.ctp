@@ -27,7 +27,7 @@ $this->Html->script([
 ?>
 
 <div class="block-header">
-    <h2 class="text-right">Last update <i class="fas fa-clock"></i> 12:00 2018-06-02</h2>
+    <h2 class="text-right">Last Update <i class="fas fa-clock"></i> 2018-06-02 12:00</h2>
     <!--    <h2>
             COUNTER ANIMATION
             <small>Taken from <a href="https://github.com/mhuggins/jquery-countTo" target="_blank">github.com/mhuggins/jquery-countTo</a>
