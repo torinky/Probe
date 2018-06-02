@@ -1,6 +1,13 @@
-[data-fa-i2svg]{
-margin-top: 7px;
+[data-fa-i2svg] {
+    margin-top: 7px;
 }
-.menu{
-    overflow-y:hidden
+
+.menu {
+    overflow-y: hidden
+}
+
+.info-box .icon [data-fa-i2svg] {
+    color: #fff;
+    width: 40px;
+    height: 65px;
 }

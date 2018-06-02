@@ -23,7 +23,15 @@ use Cake\View\View;
  *
  * @link https://book.cakephp.org/3.0/en/views.html#the-app-view
  */
-class AppView extends View
+
+/**
+ * @property \BootstrapUI\View\Helper\PaginatorHelper $Paginator
+ * @property \BootstrapUI\View\Helper\FormHelper $Form
+ * @property \BootstrapUI\View\Helper\HtmlHelper $Html
+ * @property \BootstrapUI\View\Helper\FlashHelper $Flash
+ * @property \BootstrapUI\View\Helper\BreadcrumbsHelper $Breadcrumbs
+ */
+class appview extends View
 {
     // load vendor directory
     //    public $layout = 'BootstrapUI.default';
