@@ -144,3 +144,5 @@
 </div>
 
 <?php $this->end(); ?>
+
+<?= $this->fetch('content') ?>

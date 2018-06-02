@@ -11,7 +11,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title><?= $this->fetch('title') ?></title>
     <!-- Favicon-->
-    <link rel="icon" href="/node_modules/adminbsb-materialdesign/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= \Cake\Routing\Router::url('/node_modules/adminbsb-materialdesign/favicon.ico') ?>"
+          type="image/x-icon">
 
     <!-- Google Fonts -->
     <!--    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">-->
@@ -41,7 +42,7 @@
         '/node_modules/adminbsb-materialdesign/css/style.css',
         '/node_modules/adminbsb-materialdesign/css/themes/all-themes.css',
         'dashboard',
-    ]) ?>
+    ]) . $this->fetch('css') ?>
 </head>
 
 <body class="theme-red">
@@ -107,32 +108,23 @@
 
 <section class="content">
     <div class="container-fluid">
-        <div class="block-header">
-            <?= $this->fetch('content') ?>
-        </div>
+        <?= $this->fetch('content') ?>
     </div>
 </section>
 
 <!-- Jquery Core Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/plugins/jquery/jquery.min.js"></script>-->
 
 <!-- Bootstrap Core Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap/js/bootstrap.js"></script>-->
 
 <!-- Select Plugin Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>-->
 
 <!-- Slimscroll Plugin Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>-->
 
 <!-- Waves Effect Plugin Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js"></script>-->
 
 <!-- Custom Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/js/admin.js"></script>-->
 
 <!-- Demo Js -->
-<!--<script src="../node_modules/adminbsb-materialdesign/js/demo.js"></script>-->
 
 <?=
 $this->Html->script([
@@ -143,8 +135,9 @@ $this->Html->script([
     "/node_modules/adminbsb-materialdesign/plugins/jquery-slimscroll/jquery.slimscroll.js",
     "/node_modules/adminbsb-materialdesign/plugins/node-waves/waves.js",
     "/node_modules/adminbsb-materialdesign/js/admin.js",
-    "/node_modules/adminbsb-materialdesign/js/demo.js",
-])
+    "dashboard",
+]) .
+$this->fetch('script');
 ?>
 </body>
 
