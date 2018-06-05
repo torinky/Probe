@@ -24,6 +24,21 @@ $this->Html->script([
     'infobox-1.js'
 ], ['block' => true]);
 
+debug($servers);
+$serverInfobox = '';
+foreach ($servers as $sKey => $server) {
+    if ($server->state) {
+        $state = 'Active';
+        /*        $serverInfobox =  $this->Adminbsb->infobox('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>',
+                    [
+                            'bgClass' => 'bg-light-green',
+                        ]);*/
+    } else {
+        $state = 'Inactive';
+    }
+    $serverInfobox .= new \App\View\Helper\Infobox('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>');
+}
+
 ?>
 
 <div class="block-header">
@@ -37,6 +52,7 @@ $this->Html->script([
         HTTP
     </h2>
 </div>
+<?= $serverInfobox ?>
 <!-- Counter Examples -->
 <div class="row clearfix">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

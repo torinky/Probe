@@ -30,6 +30,7 @@ use Cake\View\View;
  * @property \BootstrapUI\View\Helper\HtmlHelper $Html
  * @property \BootstrapUI\View\Helper\FlashHelper $Flash
  * @property \BootstrapUI\View\Helper\BreadcrumbsHelper $Breadcrumbs
+ * @property \cake\View\Helper\AdminbsbHelper $Adminbsb
  */
 class appview extends View
 {
@@ -53,5 +54,6 @@ class appview extends View
         $this->loadHelper('Form', ['className' => 'BootstrapUI.Form']);
         $this->loadHelper('Flash', ['className' => 'BootstrapUI.Flash']);
         $this->loadHelper('Paginator', ['className' => 'BootstrapUI.Paginator']);
+        $this->loadHelper('Adminbsb');
     }
 }
