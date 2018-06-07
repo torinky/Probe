@@ -24,19 +24,21 @@ $this->Html->script([
     'infobox-1.js'
 ], ['block' => true]);
 
-debug($servers);
+//debug($servers);
 $serverInfobox = '';
+$baseInfobox = new \App\View\Helper\Infobox('', 'fas fa-server');
+/** @var array[] $servers */
+/** @var \App\Model\Table\ServersTable $server */
 foreach ($servers as $sKey => $server) {
     if ($server->state) {
+        $baseInfobox->setIconBg('bg-light-green');
         $state = 'Active';
-        /*        $serverInfobox =  $this->Adminbsb->infobox('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>',
-                    [
-                            'bgClass' => 'bg-light-green',
-                        ]);*/
     } else {
+        $baseInfobox->setIconBg('bg-red');
         $state = 'Inactive';
     }
-    $serverInfobox .= new \App\View\Helper\Infobox('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>');
+    $baseInfobox->setContent('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>');
+    $serverInfobox .= $baseInfobox;
 }
 
 ?>
