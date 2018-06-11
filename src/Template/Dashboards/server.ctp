@@ -5,9 +5,12 @@
  * Date: 2018/05/29
  * Time: 22:27
  */
+
 /**
  * @var \App\View\AppView $this
  */
+
+use Cake\Datasource\ConnectionManager;
 
 $this->extend('/Dashboards/menus');
 
@@ -25,6 +28,8 @@ $this->Html->script([
 ], ['block' => true]);
 
 //debug($servers);
+
+//servers
 $serverInfobox = '';
 $baseInfobox = new \App\View\Helper\Infobox('', 'fas fa-server');
 /** @var array[] $servers */
@@ -41,6 +46,43 @@ foreach ($servers as $sKey => $server) {
     $serverInfobox .= $baseInfobox;
 }
 
+
+//dbs
+//debug(\Cake\Core\Configure::read('Datasources'));
+//debug(\Cake\Core\Configure::read('dbs'));
+$dbInfobox = '';
+$baseInfobox = new \App\View\Helper\Infobox('', 'fas fa-database');
+foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
+//debug($datasourceName);
+    $errorMsg = '';
+    try {
+        $connection = ConnectionManager::get($datasourceName);
+        $connected = $connection->connect();
+    } catch (Exception $connectionError) {
+        $connected = false;
+        $errorMsg = $connectionError->getMessage();
+        if (method_exists($connectionError, 'getAttributes')) :
+            $attributes = $connectionError->getAttributes();
+            if (isset($errorMsg['message'])) :
+                $errorMsg .= '<br />' . $attributes['message'];
+            endif;
+        endif;
+    }
+
+    if ($connected) {
+        $baseInfobox->setIconBg('bg-light-green');
+        $state = 'Active';
+        $baseInfobox->setTooltip('');
+    } else {
+        $baseInfobox->setIconBg('bg-red');
+        $state = 'Inactive';
+        $baseInfobox->setTooltip($errorMsg);
+//        $baseInfobox->setContent('<div data-toggle="tooltip" title="' .h($errorMsg). '"><div class="text">' . $datasourceName . '</div><div class="number">' . $state . '</div><div class="small">' .$errorMsg. '</div></div>');
+    }
+    $baseInfobox->setContent('<div class="text">' . $datasourceName . '</div><div class="number">' . $state . '</div>');
+    $dbInfobox .= $baseInfobox;
+
+}
 ?>
 
 <div class="block-header">
@@ -54,9 +96,9 @@ foreach ($servers as $sKey => $server) {
         HTTP
     </h2>
 </div>
-<?= $serverInfobox ?>
 <!-- Counter Examples -->
 <div class="row clearfix">
+    <?= $serverInfobox ?>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box hover-expand-effect">
             <div class="icon bg-light-green">
@@ -81,31 +123,10 @@ foreach ($servers as $sKey => $server) {
     </div>
 </div>
 <div class="block-header">
-    <h2>DATABASES</h2>
+    <h2>DATASOURCES</h2>
 </div>
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box hover-expand-effect">
-            <div class="icon bg-light-green">
-                <i class="fas fa-database"></i>
-            </div>
-            <div class="content">
-                <div class="text">Master</div>
-                <div class="number">Active</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box hover-expand-effect">
-            <div class="icon bg-red">
-                <i class="fas fa-database"></i>
-            </div>
-            <div class="content">
-                <div class="text">Slave</div>
-                <div class="number">Inactive</div>
-            </div>
-        </div>
-    </div>
+    <?= $dbInfobox ?>
 
 </div>
 

@@ -8,6 +8,10 @@ $(function () {
     setSkinListHeightAndScroll(false);
     setSettingListHeightAndScroll(false);
   });
+
+  //tooltip
+  $('[data-toggle="tooltip"]').tooltip();
+
 });
 
 //Skin changer

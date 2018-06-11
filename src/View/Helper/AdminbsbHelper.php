@@ -26,6 +26,7 @@ class Infobox
     private $iconBg = '';
     private $column = 'col-lg-3 col-md-3 col-sm-6 col-xs-12';
     private $effect = 'hover-expand-effect';
+    private $tooltip = '';
 
     public function __construct($content = '', $icon = 'fas fa-server', $iconBg = 'bg-light-green')
     {
@@ -36,7 +37,8 @@ class Infobox
 
     public function __toString()
     {
-        return <<<HTML
+
+        $result = <<<HTML
  <div class="{$this->column}">
         <div class="info-box {$this->effect}">
             <div class="icon {$this->iconBg}">
@@ -48,6 +50,12 @@ class Infobox
         </div>
     </div>
 HTML;
+
+        if (!empty($this->tooltip)) {
+            $result = '<div data-toggle="tooltip" data-html="true" title="' . $this->tooltip . '">' . $result . '</div>';
+        }
+
+        return $result;
 
     }
 
@@ -115,5 +123,21 @@ HTML;
     {
         $this->iconBg = $iconBg;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTooltip()
+    {
+        return $this->tooltip;
+    }
+
+    /**
+     * @param string $tooltip
+     */
+    public function setTooltip($tooltip)
+    {
+        $this->tooltip = $tooltip;
     }
 }
