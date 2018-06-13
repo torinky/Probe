@@ -43,7 +43,20 @@ foreach ($servers as $sKey => $server) {
         $state = 'Inactive';
     }
     $baseInfobox->setContent('<div class="text">' . $server->name . '</div><div class="number">' . $state . '</div>');
+    $baseInfobox->setUrl([
+        'controller' => 'servers',
+        'action' => 'view',
+        $server->id
+    ]);
     $serverInfobox .= $baseInfobox;
+    /*    $serverInfobox .= $this->Html->link($baseInfobox,
+            [
+                'controller' => 'servers',
+                'action' => 'view',
+                $server->id
+            ], [
+                'escape' => false
+            ]);*/
 }
 
 

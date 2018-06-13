@@ -1,7 +1,11 @@
 <?php
+/**
+ * @var \App\View\AppView $this
+ */
 
 namespace App\View\Helper;
 
+use Cake\Routing\Router;
 use Cake\View\Helper;
 
 /**
@@ -27,6 +31,8 @@ class Infobox
     private $column = 'col-lg-3 col-md-3 col-sm-6 col-xs-12';
     private $effect = 'hover-expand-effect';
     private $tooltip = '';
+    private $url;
+    private $target = '_self';
 
     public function __construct($content = '', $icon = 'fas fa-server', $iconBg = 'bg-light-green')
     {
@@ -38,8 +44,7 @@ class Infobox
     public function __toString()
     {
 
-        $result = <<<HTML
- <div class="{$this->column}">
+        $infoBox = <<<HTML
         <div class="info-box {$this->effect}">
             <div class="icon {$this->iconBg}">
                 <i class="{$this->icon}"></i>
@@ -48,7 +53,22 @@ class Infobox
                 {$this->content}
             </div>
         </div>
-    </div>
+
+HTML;
+
+        if (!empty($this->url)) {
+            $url = Router::url($this->url);
+            $infoBox = <<<HTML
+<a href="{$url}" target="{$this->target}">{$infoBox}</a>
+HTML;
+
+//            $infoBox = $this->Html->link($infoBox,$this->url,['escape'=>false]);
+        }
+
+        $result = <<<HTML
+ <div class="{$this->column}">
+ {$infoBox}
+ </div>
 HTML;
 
         if (!empty($this->tooltip)) {
@@ -139,5 +159,13 @@ HTML;
     public function setTooltip($tooltip)
     {
         $this->tooltip = $tooltip;
+    }
+
+    public function setUrl($url, $target = '')
+    {
+        $this->url = $url;
+        if (!empty($target)) {
+            $this->target = $target;
+        }
     }
 }
