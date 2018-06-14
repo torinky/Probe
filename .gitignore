@@ -39,3 +39,4 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 /webroot/js/node_modules/
+/node_modules/
