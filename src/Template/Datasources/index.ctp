@@ -15,6 +15,7 @@ $this->start('tb_actions');
         <th><?= $this->Paginator->sort('id'); ?></th>
         <th><?= $this->Paginator->sort('created'); ?></th>
         <th><?= $this->Paginator->sort('modified'); ?></th>
+        <th><?= $this->Paginator->sort('port'); ?></th>
         <th class="actions"><?= __('Actions'); ?></th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@ $this->start('tb_actions');
             <td><?= $this->Number->format($datasource->id) ?></td>
             <td><?= h($datasource->created) ?></td>
             <td><?= h($datasource->modified) ?></td>
+            <td><?= $this->Number->format($datasource->port) ?></td>
             <td class="actions">
                 <?= $this->Html->link('', ['action' => 'view', $datasource->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                 <?= $this->Html->link('', ['action' => 'edit', $datasource->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

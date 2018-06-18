@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Controller\AppController;
-
 /**
  * Servers Controller
  *
@@ -11,7 +9,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Server[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ServersController extends AppController
+class ServersController extends ServersBaseContoroller
 {
 
     /**
@@ -109,29 +107,4 @@ class ServersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    /**
-     * デフォルトセットを保存する
-     */
-    public function setDefault()
-    {
-        $data = $this->Servers->getDefaultSet();
-        $this->Servers->save($data, [
-            'associated' => [
-                'Storages' => [
-                    'associated' => ['StoragesLogs']
-                ],
-                'ServersLogs'
-            ]
-        ]);
-
-        $this->setAction('index');
-    }
-
-    public function updateLog()
-    {
-        if ($this->Servers->addLogs() === false) {
-            $this->setAction('setDefault');
-        }
-        $this->setAction('index');
-    }
 }

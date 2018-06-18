@@ -37,6 +37,10 @@ $this->end();
             <td><?= $this->Number->format($datasource->id) ?></td>
         </tr>
         <tr>
+            <td><?= __('Port') ?></td>
+            <td><?= $this->Number->format($datasource->port) ?></td>
+        </tr>
+        <tr>
             <td><?= __('Created') ?></td>
             <td><?= h($datasource->created) ?></td>
         </tr>
@@ -61,8 +65,12 @@ $this->end();
             <td><?= $this->Text->autoParagraph(h($datasource->memo)); ?></td>
         </tr>
         <tr>
-            <td><?= __('Type') ?></td>
-            <td><?= $this->Text->autoParagraph(h($datasource->type)); ?></td>
+            <td><?= __('Username') ?></td>
+            <td><?= $this->Text->autoParagraph(h($datasource->username)); ?></td>
+        </tr>
+        <tr>
+            <td><?= __('DatabaseName') ?></td>
+            <td><?= $this->Text->autoParagraph(h($datasource->databaseName)); ?></td>
         </tr>
     </table>
 </div>

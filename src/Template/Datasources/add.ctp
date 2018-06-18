@@ -33,7 +33,9 @@ $this->end();
     echo $this->Form->control('driver');
     echo $this->Form->control('host');
     echo $this->Form->control('memo');
-    echo $this->Form->control('type');
+    echo $this->Form->control('username');
+    echo $this->Form->control('databaseName');
+    echo $this->Form->control('port');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

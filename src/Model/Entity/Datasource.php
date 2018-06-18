@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -14,7 +13,9 @@ use Cake\ORM\Entity;
  * @property string $memo
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
- * @property string $type
+ * @property string $username
+ * @property string $databaseName
+ * @property int $port
  *
  * @property \App\Model\Entity\DatasourcesLog[] $datasources_logs
  */
@@ -37,7 +38,9 @@ class Datasource extends Entity
         'memo' => true,
         'created' => true,
         'modified' => true,
-        'type' => true,
+        'username' => true,
+        'databaseName' => true,
+        'port' => true,
         'datasources_logs' => true
     ];
 }

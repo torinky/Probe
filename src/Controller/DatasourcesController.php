@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 /**
@@ -9,7 +8,7 @@ namespace App\Controller;
  *
  * @method \App\Model\Entity\Datasource[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class DatasourcesController extends AppController
+class DatasourcesController extends DatasourcesBaseController
 {
 
     /**

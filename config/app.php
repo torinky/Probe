@@ -290,6 +290,7 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Sqlite',
             'persistent' => false,
+            'host' => 'localhost',
             'username' => '',
             'password' => '',
             'database' => ROOT . DS . 'database' . DS . 'probe.sqlite',
