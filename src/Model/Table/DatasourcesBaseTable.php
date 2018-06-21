@@ -69,6 +69,7 @@ class DatasourcesBaseTable extends Table
 
             $data = $this->newEntity();
 
+            $data->datasourceName = $datasourceName;
             $data->className = Utility\Hash::get($datasource, 'className') ?? 'none';
             $data->driver = Utility\Hash::get($datasource, 'driver') ?? 'none';
             $data->host = Utility\Hash::get($datasource, 'host') ?? 'localhost';
@@ -85,22 +86,23 @@ class DatasourcesBaseTable extends Table
 
     public function addLogs()
     {
-        $name = gethostname();
-        $targetQuery = $this->find()->where([
-            'name' => $name,
-            'ip' => gethostbyname($name),
-        ]);
-        $target = $targetQuery->first();
-        if (is_null($target)) {
-            return false;
+        foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
+            $targetQuery = $this->find()->where([
+                'host' => Utility\Hash::get($datasource, 'host'),
+                'databaseName' => Utility\Hash::get($datasource, 'database'),
+                'username' => Utility\Hash::get($datasource, 'username'),
+                'port' => Utility\Hash::get($datasource, 'port'),
+            ]);
+            $target = $targetQuery->first();
+            if (is_null($target)) {
+                continue;
+            }
+
+            $datasourceLog = $this->DatasourcesLogs->getDefaultSet($datasource);
+            $datasourceLog->datasource_id = $target->id;
+            $this->DatasourcesLogs->save($datasourceLog);
+
         }
-
-        $serverLogData = $this->DatasourcesLogs->getDefaultSet($target->ip);
-        $serverLogData->server_id = $target->id;
-        $this->DatasourcesLogs->save($serverLogData);
-
-        $this->Storages->addLogs($target->id);
-
     }
 
 }

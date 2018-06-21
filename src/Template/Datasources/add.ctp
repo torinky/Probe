@@ -36,6 +36,7 @@ $this->end();
     echo $this->Form->control('username');
     echo $this->Form->control('databaseName');
     echo $this->Form->control('port');
+    echo $this->Form->control('datasourceName');
     ?>
 </fieldset>
 <?= $this->Form->button(__("Add")); ?>

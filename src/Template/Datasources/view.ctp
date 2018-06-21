@@ -72,6 +72,10 @@ $this->end();
             <td><?= __('DatabaseName') ?></td>
             <td><?= $this->Text->autoParagraph(h($datasource->databaseName)); ?></td>
         </tr>
+        <tr>
+            <td><?= __('DatasourceName') ?></td>
+            <td><?= $this->Text->autoParagraph(h($datasource->datasourceName)); ?></td>
+        </tr>
     </table>
 </div>
 
@@ -90,6 +94,7 @@ $this->end();
                 <th><?= __('Condition') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
+                <th><?= __('Server Id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>
@@ -102,6 +107,7 @@ $this->end();
                     <td><?= h($datasourcesLogs->condition) ?></td>
                     <td><?= h($datasourcesLogs->created) ?></td>
                     <td><?= h($datasourcesLogs->modified) ?></td>
+                    <td><?= h($datasourcesLogs->server_id) ?></td>
                     <td class="actions">
                         <?= $this->Html->link('', ['controller' => 'DatasourcesLogs', 'action' => 'view', $datasourcesLogs->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
                         <?= $this->Html->link('', ['controller' => 'DatasourcesLogs', 'action' => 'edit', $datasourcesLogs->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>

@@ -83,6 +83,10 @@ class DatasourcesTable extends DatasourcesBaseTable
             ->integer('port')
             ->allowEmpty('port');
 
+        $validator
+            ->scalar('datasourceName')
+            ->allowEmpty('datasourceName');
+
         return $validator;
     }
 

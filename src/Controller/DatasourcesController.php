@@ -8,7 +8,7 @@ namespace App\Controller;
  *
  * @method \App\Model\Entity\Datasource[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class DatasourcesController extends DatasourcesBaseController
+class DatasourcesController extends AppController
 {
 
     /**

@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string $username
  * @property string $databaseName
  * @property int $port
+ * @property string $datasourceName
  *
  * @property \App\Model\Entity\DatasourcesLog[] $datasources_logs
  */
@@ -41,6 +42,7 @@ class Datasource extends Entity
         'username' => true,
         'databaseName' => true,
         'port' => true,
+        'datasourceName' => true,
         'datasources_logs' => true
     ];
 }

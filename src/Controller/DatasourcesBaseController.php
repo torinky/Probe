@@ -19,7 +19,7 @@ class DatasourcesBaseController extends AppController
     public function setDefault()
     {
         $data = $this->Datasources->getDefaultSet();
-        debug($data);
+//        debug($data);
 //        $result = $this->Datasources->saveMany($data);
         $result = $this->Datasources->saveMany($data, [
             /*            'associated' => [
