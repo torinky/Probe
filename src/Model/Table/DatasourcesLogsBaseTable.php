@@ -4,6 +4,7 @@ namespace App\Model\Table;
 
 use Cake\Datasource\ConnectionManager;
 use Cake\ORM\Table;
+use Exception;
 
 /**
  * DatasourcesLogs Model
@@ -24,6 +25,8 @@ class DatasourcesLogsBaseTable extends Table
 {
     public function getDefaultSet($datasourceName)
     {
+//        debug($datasourceName);
+
         $errorMsg = '';
         try {
             $connection = ConnectionManager::get($datasourceName);
@@ -33,15 +36,14 @@ class DatasourcesLogsBaseTable extends Table
             $errorMsg = $connectionError->getMessage();
             if (method_exists($connectionError, 'getAttributes')) :
                 $attributes = $connectionError->getAttributes();
-                if (isset($errorMsg['message'])) :
+                if (isset($attributes['message'])) :
                     $errorMsg .= '\n' . $attributes['message'];
                 endif;
             endif;
         }
         $data = $this->newEntity();
-//        $data->condition = $this->ping($host);
         $data->error = $errorMsg;
-        $data->condition = $connected;
+        $data->condition = $connected ?? 0;
         return $data;
 
     }

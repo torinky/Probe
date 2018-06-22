@@ -22,12 +22,12 @@ class DatasourcesBaseController extends AppController
 //        debug($data);
 //        $result = $this->Datasources->saveMany($data);
         $result = $this->Datasources->saveMany($data, [
-            /*            'associated' => [
-                            'Storages' => [
-                                'associated' => ['StoragesLogs']
-                            ],
-                            'ServersLogs'
-                        ]*/
+            'associated' => [
+//                            'Datasources' => [
+//                                'associated' => ['DatasourcesLogs']
+//                            ],
+                'DatasourcesLogs'
+            ]
         ]);
         debug($result);
 

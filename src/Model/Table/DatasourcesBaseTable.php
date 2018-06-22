@@ -76,6 +76,7 @@ class DatasourcesBaseTable extends Table
             $data->port = Utility\Hash::get($datasource, 'port') ?? 0;
             $data->username = Utility\Hash::get($datasource, 'username') ?? 'none';
             $data->databaseName = Utility\Hash::get($datasource, 'database') ?? 'none';
+            $data->datasources_logs = [$this->DatasourcesLogs->getDefaultSet($datasourceName)];
 
             $defaultSets[] = $data;
 //debug($datasourceName);
