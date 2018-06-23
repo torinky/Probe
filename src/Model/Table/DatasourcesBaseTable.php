@@ -55,28 +55,15 @@ class DatasourcesBaseTable extends Table
 
         foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
 
-            $data = $this->find('all')->where([
-                'host' => Utility\Hash::get($datasource, 'host'),
-                'databaseName' => Utility\Hash::get($datasource, 'database'),
-                'username' => Utility\Hash::get($datasource, 'username'),
-                'port' => Utility\Hash::get($datasource, 'port'),
-            ])->count();
+            $data = $this->findByDatasouceSetting($datasource);
 
-            if ($data > 0) {
+            if (!is_null($data)) {
+                $this->addLog($datasourceName, $data);
                 continue;
             }
 //            debug($datasource);
 
-            $data = $this->newEntity();
-
-            $data->datasourceName = $datasourceName;
-            $data->className = Utility\Hash::get($datasource, 'className') ?? 'none';
-            $data->driver = Utility\Hash::get($datasource, 'driver') ?? 'none';
-            $data->host = Utility\Hash::get($datasource, 'host') ?? 'localhost';
-            $data->port = Utility\Hash::get($datasource, 'port') ?? 0;
-            $data->username = Utility\Hash::get($datasource, 'username') ?? 'none';
-            $data->databaseName = Utility\Hash::get($datasource, 'database') ?? 'none';
-            $data->datasources_logs = [$this->DatasourcesLogs->getDefaultSet($datasourceName)];
+            $data = $this->getSingleDefault($datasourceName, $datasource);
 
             $defaultSets[] = $data;
 //debug($datasourceName);
@@ -88,22 +75,63 @@ class DatasourcesBaseTable extends Table
     public function addLogs()
     {
         foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
-            $targetQuery = $this->find()->where([
-                'host' => Utility\Hash::get($datasource, 'host'),
-                'databaseName' => Utility\Hash::get($datasource, 'database'),
-                'username' => Utility\Hash::get($datasource, 'username'),
-                'port' => Utility\Hash::get($datasource, 'port'),
-            ]);
-            $target = $targetQuery->first();
-            if (is_null($target)) {
+            $data = $this->findByDatasouceSetting($datasource);
+            if (is_null($data)) {
                 continue;
             }
-
-            $datasourceLog = $this->DatasourcesLogs->getDefaultSet($datasource);
-            $datasourceLog->datasource_id = $target->id;
-            $this->DatasourcesLogs->save($datasourceLog);
-
+            $this->addLog($datasourceName, $data);
         }
     }
+
+    /**
+     * @param $datasourceName
+     * @param $datasource
+     * @return \App\Model\Entity\Datasource
+     */
+    public function getSingleDefault($datasourceName, $datasource): \App\Model\Entity\Datasource
+    {
+        $data = $this->newEntity();
+
+        $data->datasourceName = $datasourceName;
+        $data->className = Utility\Hash::get($datasource, 'className') ?? 'none';
+        $data->driver = Utility\Hash::get($datasource, 'driver') ?? 'none';
+        $data->host = Utility\Hash::get($datasource, 'host') ?? 'localhost';
+        $data->port = Utility\Hash::get($datasource, 'port') ?? 0;
+        $data->username = Utility\Hash::get($datasource, 'username') ?? 'none';
+        $data->databaseName = Utility\Hash::get($datasource, 'database') ?? 'none';
+        $data->datasources_logs = [$this->DatasourcesLogs->getDefaultSet($datasourceName)];
+        return $data;
+    }
+
+    /**
+     * @param string $datasourceName
+     * @param \Cake\Datasource\EntityInterface|array|null $target
+     * @return \App\Model\Entity\DatasourcesLog|bool|\Cake\Datasource\EntityInterface|false|mixed
+     */
+    private function addLog($datasourceName, $target)
+    {
+        $datasourceLog = $this->DatasourcesLogs->getDefaultSet($datasourceName);
+        $datasourceLog->datasource_id = $target->id;
+        return $this->DatasourcesLogs->save($datasourceLog);
+    }
+
+    /**
+     * @param $datasource
+     * @return array|\Cake\Datasource\EntityInterface|null
+     */
+    private function findByDatasouceSetting($datasource)
+    {
+        $targetQuery = $this->find()->where([
+            'host' => Utility\Hash::get($datasource, 'host'),
+            'databaseName' => Utility\Hash::get($datasource, 'database'),
+            'username' => Utility\Hash::get($datasource, 'username') ?? '',
+            'port' => Utility\Hash::get($datasource, 'port') ?? 0,
+        ]);
+
+//            debug($targetQuery);
+        $data = $targetQuery->first();
+        return $data;
+    }
+
 
 }
