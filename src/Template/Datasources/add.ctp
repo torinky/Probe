@@ -12,6 +12,8 @@ $this->start('tb_actions');
 <li><?= $this->Html->link(__('List Datasources'), ['action' => 'index']) ?></li>
 <li><?= $this->Html->link(__('List Datasources Logs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']) ?> </li>
 <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']) ?> </li>
+<li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']) ?> </li>
+<li><?= $this->Html->link(__('New Table'), ['controller' => 'Tables', 'action' => 'add']) ?> </li>
 <?php
 $this->end();
 
@@ -21,6 +23,8 @@ $this->start('tb_sidebar');
     <li><?= $this->Html->link(__('List Datasources'), ['action' => 'index']) ?></li>
     <li><?= $this->Html->link(__('List Datasources Logs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']) ?> </li>
+    <li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']) ?> </li>
+    <li><?= $this->Html->link(__('New Table'), ['controller' => 'Tables', 'action' => 'add']) ?> </li>
 </ul>
 <?php
 $this->end();

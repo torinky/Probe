@@ -6,6 +6,8 @@ $this->start('tb_actions');
 <li><?= $this->Html->link(__('New Datasource'), ['action' => 'add']); ?></li>
 <li><?= $this->Html->link(__('List DatasourcesLogs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']); ?></li>
 <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']); ?></li>
+<li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']); ?></li>
+<li><?= $this->Html->link(__('New Table'), ['controller' => 'Tables', 'action' => 'add']); ?></li>
 <?php $this->end(); ?>
 <?php $this->assign('tb_sidebar', '<ul class="nav nav-sidebar">' . $this->fetch('tb_actions') . '</ul>'); ?>
 

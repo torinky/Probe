@@ -20,16 +20,16 @@ class DatasourcesBaseController extends AppController
     {
         $data = $this->Datasources->getDefaultSet();
 //        debug($data);
-//        $result = $this->Datasources->saveMany($data);
         $result = $this->Datasources->saveMany($data, [
             'associated' => [
 //                            'Datasources' => [
 //                                'associated' => ['DatasourcesLogs']
 //                            ],
-                'DatasourcesLogs'
+                'DatasourcesLogs',
+                'Tables',
             ]
         ]);
-        debug($result);
+//        debug($result);
 
         $this->setAction('index');
     }

@@ -10,6 +10,8 @@ $this->start('tb_actions');
 <li><?= $this->Html->link(__('New Datasource'), ['action' => 'add']) ?> </li>
 <li><?= $this->Html->link(__('List Datasources Logs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']) ?> </li>
 <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']) ?> </li>
+<li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']) ?> </li>
+<li><?= $this->Html->link(__('New Table'), ['controller' => 'Tables', 'action' => 'add']) ?> </li>
 <?php
 $this->end();
 
@@ -22,6 +24,8 @@ $this->start('tb_sidebar');
     <li><?= $this->Html->link(__('New Datasource'), ['action' => 'add']) ?> </li>
     <li><?= $this->Html->link(__('List Datasources Logs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']) ?> </li>
+    <li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']) ?> </li>
+    <li><?= $this->Html->link(__('New Table'), ['controller' => 'Tables', 'action' => 'add']) ?> </li>
 </ul>
 <?php
 $this->end();
@@ -119,5 +123,43 @@ $this->end();
         </table>
     <?php else: ?>
         <p class="panel-body">no related DatasourcesLogs</p>
+    <?php endif; ?>
+</div>
+<div class="panel panel-default">
+    <!-- Panel header -->
+    <div class="panel-heading">
+        <h3 class="panel-title"><?= __('Related Tables') ?></h3>
+    </div>
+    <?php if (!empty($datasource->tables)): ?>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('Name') ?></th>
+                <th><?= __('Created') ?></th>
+                <th><?= __('Modified') ?></th>
+                <th><?= __('Datasource Id') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($datasource->tables as $tables): ?>
+                <tr>
+                    <td><?= h($tables->id) ?></td>
+                    <td><?= h($tables->name) ?></td>
+                    <td><?= h($tables->created) ?></td>
+                    <td><?= h($tables->modified) ?></td>
+                    <td><?= h($tables->datasource_id) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link('', ['controller' => 'Tables', 'action' => 'view', $tables->id], ['title' => __('View'), 'class' => 'btn btn-default glyphicon glyphicon-eye-open']) ?>
+                        <?= $this->Html->link('', ['controller' => 'Tables', 'action' => 'edit', $tables->id], ['title' => __('Edit'), 'class' => 'btn btn-default glyphicon glyphicon-pencil']) ?>
+                        <?= $this->Form->postLink('', ['controller' => 'Tables', 'action' => 'delete', $tables->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tables->id), 'title' => __('Delete'), 'class' => 'btn btn-default glyphicon glyphicon-trash']) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="panel-body">no related Tables</p>
     <?php endif; ?>
 </div>

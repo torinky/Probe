@@ -10,12 +10,13 @@ use Cake\Utility;
  * Datasources Base Model
  *
  * @property \App\Model\Table\DatasourcesLogsTable|\Cake\ORM\Association\HasMany $DatasourcesLogs
- * @property \App\Model\Table\StoragesTable|\Cake\ORM\Association\HasMany $Storages
+ * @property \App\Model\Table\TablesTable|\Cake\ORM\Association\HasMany $Tables
  *
  * @method \App\Model\Entity\Datasource get($primaryKey, $options = [])
  * @method \App\Model\Entity\Datasource newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Datasource[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\Datasource|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Datasource|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Datasource patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Datasource[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Datasource findOrCreate($search, callable $callback = null, $options = [])
@@ -100,6 +101,10 @@ class DatasourcesBaseTable extends Table
         $data->username = Utility\Hash::get($datasource, 'username') ?? 'none';
         $data->databaseName = Utility\Hash::get($datasource, 'database') ?? 'none';
         $data->datasources_logs = [$this->DatasourcesLogs->getDefaultSet($datasourceName)];
+
+        //todo tablesがarrayのためdatasource_idが決まらないのでdatasourceをsave後に改めてdatasourceを読み出す必要がある
+        $data->tables = $this->Tables->getDefaultSets($datasourceName);
+
         return $data;
     }
 
@@ -112,6 +117,7 @@ class DatasourcesBaseTable extends Table
     {
         $datasourceLog = $this->DatasourcesLogs->getDefaultSet($datasourceName);
         $datasourceLog->datasource_id = $target->id;
+
         return $this->DatasourcesLogs->save($datasourceLog);
     }
 
@@ -130,6 +136,7 @@ class DatasourcesBaseTable extends Table
 
 //            debug($targetQuery);
         $data = $targetQuery->first();
+
         return $data;
     }
 
