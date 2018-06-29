@@ -9,7 +9,7 @@ namespace App\Controller;
  *
  * @method \App\Model\Entity\Server[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ServersController extends ServersBaseContoroller
+class ServersController extends ServersBaseController
 {
 
     /**

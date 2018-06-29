@@ -76,11 +76,15 @@ class TablesBaseTable extends Table
             if (empty($table)) {
                 continue;
             }
-            $temp = $this->newEntity();
-            $temp->name = $table;
+//            $temp = $this->newEntity();
+//            $temp->name = $table;
 
-            $data[] = $temp;
+//            $data[] = $temp;
+            $data[] = [
+                'name' => $table,
+            ];
         }
+        $data = $this->newEntities($data);
 
         return $data;
     }

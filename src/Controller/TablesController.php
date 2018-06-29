@@ -19,6 +19,9 @@ class TablesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Datasources']
+        ];
         $tables = $this->paginate($this->Tables);
 
         $this->set(compact('tables'));
@@ -34,7 +37,7 @@ class TablesController extends AppController
     public function view($id = null)
     {
         $table = $this->Tables->get($id, [
-            'contain' => ['TablesLogs']
+            'contain' => ['TablesLogs', 'Datasources']
         ]);
 
         $this->set('table', $table);

@@ -33,7 +33,7 @@ class DatasourcesController extends DatasourcesBaseController
     public function view($id = null)
     {
         $datasource = $this->Datasources->get($id, [
-            'contain' => ['DatasourcesLogs']
+            'contain' => ['DatasourcesLogs', 'Tables']
         ]);
 
         $this->set('datasource', $datasource);
