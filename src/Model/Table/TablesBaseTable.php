@@ -50,8 +50,9 @@ class TablesBaseTable extends Table
     public function getDefaultSets($datasourceName = 'default')
     {
         try {
-            $tables = ConnectionManager::get($datasourceName)->getSchemaCollection()->listTables();
-//            $connection = ConnectionManager::get($datasourceName);
+            $connection = ConnectionManager::get($datasourceName);
+            $tables = $connection->getSchemaCollection()->listTables();
+//            $tables = ConnectionManager::get($datasourceName)->getSchemaCollection()->listTables();
 //            $connected = $connection->connect();
         } catch (Exception $connectionError) {
             $connected = false;
@@ -67,24 +68,24 @@ class TablesBaseTable extends Table
         /*        $connection = ConnectionManager::get($datasourceName);
                 $collection = $connection->getSchemaCollection();
                 $tables = $collection->listTables();*/
-        /*        if (empty($tables)) {
-                    return null;
-                }*/
+        if (empty($tables)) {
+            return null;
+        }
 //        debug($tables);
         $data = [];
         foreach ($tables as $tKey => $table) {
-            if (empty($table)) {
-                continue;
-            }
-//            $temp = $this->newEntity();
-//            $temp->name = $table;
+            $tempEntities = $this->newEntity();
+            $tempEntities->name = $table;
+            $tempEntities->tables_logs = [$this->TablesLogs->getDefaultSet($connection, $table)];
+            $data[] = $tempEntities;
 
-//            $data[] = $temp;
-            $data[] = [
-                'name' => $table,
-            ];
+            /*                $data[] = [
+                    'name' => $table,
+                    'tables_logs' => [$this->TablesLogs->getDefaultSet($connection, $table)],
+                ];*/
         }
-        $data = $this->newEntities($data);
+//        $data = $this->newEntities($data);
+        debug($data);
 
         return $data;
     }
