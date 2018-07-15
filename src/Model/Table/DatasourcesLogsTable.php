@@ -1,26 +1,28 @@
 <?php
-
 namespace App\Model\Table;
 
 use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
  * DatasourcesLogs Model
  *
  * @property \App\Model\Table\DatasourcesTable|\Cake\ORM\Association\BelongsTo $Datasources
+ * @property |\Cake\ORM\Association\BelongsTo $Servers
  *
  * @method \App\Model\Entity\DatasourcesLog get($primaryKey, $options = [])
  * @method \App\Model\Entity\DatasourcesLog newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\DatasourcesLog[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\DatasourcesLog|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\DatasourcesLog|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\DatasourcesLog patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\DatasourcesLog[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\DatasourcesLog findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class DatasourcesLogsTable extends DatasourcesLogsBaseTable
+class DatasourcesLogsTable extends Table
 {
 
     /**
@@ -41,6 +43,9 @@ class DatasourcesLogsTable extends DatasourcesLogsBaseTable
 
         $this->belongsTo('Datasources', [
             'foreignKey' => 'datasource_id'
+        ]);
+        $this->belongsTo('Servers', [
+            'foreignKey' => 'server_id'
         ]);
     }
 
@@ -79,6 +84,7 @@ class DatasourcesLogsTable extends DatasourcesLogsBaseTable
     {
         $rules->add($rules->isUnique(['id']));
         $rules->add($rules->existsIn(['datasource_id'], 'Datasources'));
+        $rules->add($rules->existsIn(['server_id'], 'Servers'));
 
         return $rules;
     }

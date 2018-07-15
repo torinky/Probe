@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -13,6 +12,7 @@ use Cake\ORM\Entity;
  * @property bool $condition
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property int $server_id
  *
  * @property \App\Model\Entity\Datasource $datasource
  */
@@ -34,6 +34,7 @@ class DatasourcesLog extends Entity
         'condition' => true,
         'created' => true,
         'modified' => true,
+        'server_id' => true,
         'datasource' => true
     ];
 }

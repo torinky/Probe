@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -9,6 +8,7 @@ use Cake\Validation\Validator;
 /**
  * Servers Model
  *
+ * @property |\Cake\ORM\Association\HasMany $DatasourcesLogs
  * @property \App\Model\Table\ServersLogsTable|\Cake\ORM\Association\HasMany $ServersLogs
  * @property \App\Model\Table\StoragesTable|\Cake\ORM\Association\HasMany $Storages
  *
@@ -16,13 +16,14 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Server newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Server[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\Server|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Server|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Server patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Server[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Server findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class ServersTable extends ServersBaseTable
+class ServersTable extends Table
 {
 
     /**
@@ -41,6 +42,9 @@ class ServersTable extends ServersBaseTable
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('DatasourcesLogs', [
+            'foreignKey' => 'server_id'
+        ]);
         $this->hasMany('ServersLogs', [
             'foreignKey' => 'server_id'
         ]);
@@ -86,8 +90,6 @@ class ServersTable extends ServersBaseTable
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules = parent::buildRules($rules);
-
         $rules->add($rules->isUnique(['id']));
 
         return $rules;
