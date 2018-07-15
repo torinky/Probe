@@ -4,6 +4,7 @@ $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('tb_actions');
 ?>
 <li><?= $this->Html->link(__('New Datasource'), ['action' => 'add']); ?></li>
+<li><?= $this->Html->link(__('Log Info on Datasources'), ['action' => 'updateLog']); ?></li>
 <li><?= $this->Html->link(__('List DatasourcesLogs'), ['controller' => 'DatasourcesLogs', 'action' => 'index']); ?></li>
 <li><?= $this->Html->link(__('New Datasources Log'), ['controller' => 'DatasourcesLogs', 'action' => 'add']); ?></li>
 <li><?= $this->Html->link(__('List Tables'), ['controller' => 'Tables', 'action' => 'index']); ?></li>

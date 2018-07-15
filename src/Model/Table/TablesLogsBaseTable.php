@@ -25,16 +25,16 @@ class TablesLogsBaseTable extends Table
 {
     /**
      * @param \Cake\Datasource\ConnectionInterface $connection
-     * @param string $datasourceName
+     * @param string $tableName
      * @return \App\Model\Entity\TablesLog
      * @throws \Cake\Datasource\Exception\
      */
-    public function getDefaultSet($connection, $datasourceName)
+    public function getDefaultSet($connection, $tableName)
     {
         $data = $this->newEntity();
 
         try {
-            $rows = $connection->query('SELECT count(*) as ct FROM ' . $datasourceName)->fetch('assoc');
+            $rows = $connection->query('SELECT count(*) as ct FROM ' . $tableName)->fetch('assoc');
             $data->condition = true;
             $data->rows = $rows['ct'];
         } catch (Exception $connectionError) {

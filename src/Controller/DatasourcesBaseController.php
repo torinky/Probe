@@ -34,4 +34,12 @@ class DatasourcesBaseController extends AppController
         $this->setAction('index');
     }
 
+    public function updateLog()
+    {
+        if ($this->Datasources->addLogs() === false) {
+            $this->setAction('setDefault');
+        }
+        $this->setAction('index');
+    }
+
 }

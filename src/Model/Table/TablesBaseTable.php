@@ -51,11 +51,7 @@ class TablesBaseTable extends Table
     {
         try {
             $connection = ConnectionManager::get($datasourceName);
-            $tables = $connection->getSchemaCollection()->listTables();
-//            $tables = ConnectionManager::get($datasourceName)->getSchemaCollection()->listTables();
-//            $connected = $connection->connect();
         } catch (Exception $connectionError) {
-            $connected = false;
             $errorMsg = $connectionError->getMessage();
             if (method_exists($connectionError, 'getAttributes')) :
                 $attributes = $connectionError->getAttributes();
@@ -64,10 +60,12 @@ class TablesBaseTable extends Table
                 endif;
             endif;
         }
+        if (!isset($connection)) {
+            return [];
+        }
 
-        /*        $connection = ConnectionManager::get($datasourceName);
-                $collection = $connection->getSchemaCollection();
-                $tables = $collection->listTables();*/
+        $tables = $this->getTableNames($connection);
+
         if (empty($tables)) {
             return null;
         }
@@ -78,15 +76,65 @@ class TablesBaseTable extends Table
             $tempEntities->name = $table;
             $tempEntities->tables_logs = [$this->TablesLogs->getDefaultSet($connection, $table)];
             $data[] = $tempEntities;
-
-            /*                $data[] = [
-                    'name' => $table,
-                    'tables_logs' => [$this->TablesLogs->getDefaultSet($connection, $table)],
-                ];*/
         }
-//        $data = $this->newEntities($data);
+
         debug($data);
 
         return $data;
+    }
+
+    /**
+     * @param \App\Model\Entity\Datasource $datasource
+     * @return \App\Model\Entity\TablesLog|bool|\Cake\Datasource\EntityInterface|false
+     * @throws \Exception
+     */
+    public function addLogs($datasource)
+    {
+        $connection = ConnectionManager::get($datasource->datasourceName);
+
+        $tableNames = $this->getTableNames($connection);
+
+        $logs = [];
+        foreach ($tableNames as $tKey => $tableName) {
+            $tablesQuery = $this->find()->where([
+                'datasource_id' => $datasource->id,
+                'name' => $tableName,
+            ])->orderAsc('name');
+
+            /** @var \App\Model\Entity\Table $table */
+            $table = $tablesQuery->first();
+            if (empty($table)) {
+                continue;
+            }
+            $tmpLog = $this->TablesLogs->getDefaultSet($connection, $table->name);
+            $tmpLog->table_id = $table->id;
+            $logs[] = $tmpLog;
+
+        }
+        debug($logs);
+
+        return $this->TablesLogs->saveMany($logs);
+    }
+
+    /**
+     * @param \Cake\Datasource\ConnectionInterface $connection
+     * @return array
+     */
+    private function getTableNames($connection): array
+    {
+        $tables = [];
+        try {
+            $tables = $connection->getSchemaCollection()->listTables();
+        } catch (Exception $connectionError) {
+            $errorMsg = $connectionError->getMessage();
+            if (method_exists($connectionError, 'getAttributes')) :
+                $attributes = $connectionError->getAttributes();
+                if (isset($attributes['message'])) :
+                    $errorMsg .= '\n' . $attributes['message'];
+                endif;
+            endif;
+        }
+
+        return $tables;
     }
 }

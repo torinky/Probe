@@ -4,7 +4,7 @@ $this->extend('../Layout/TwitterBootstrap/dashboard');
 $this->start('tb_actions');
 ?>
 <li><?= $this->Html->link(__('New Server'), ['action' => 'add']); ?></li>
-<li><?= $this->Html->link(__('Log Change Info on Server'), ['action' => 'updateLog']); ?></li>
+<li><?= $this->Html->link(__('Log Info on this Server'), ['action' => 'updateLog']); ?></li>
 <li><?= $this->Html->link(__('List ServersLogs'), ['controller' => 'ServersLogs', 'action' => 'index']); ?></li>
 <li><?= $this->Html->link(__('New Servers Log'), ['controller' => 'ServersLogs', 'action' => 'add']); ?></li>
 <li><?= $this->Html->link(__('List Storages'), ['controller' => 'Storages', 'action' => 'index']); ?></li>

@@ -56,7 +56,7 @@ class DatasourcesBaseTable extends Table
 
         foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
 
-            $data = $this->findByDatasouceSetting($datasource);
+            $data = $this->findByDatasourceSetting($datasource)->first();
 
             if (!is_null($data)) {
                 $this->addLog($datasourceName, $data);
@@ -76,7 +76,7 @@ class DatasourcesBaseTable extends Table
     public function addLogs()
     {
         foreach (\Cake\Core\Configure::read('Datasources') as $datasourceName => $datasource) {
-            $data = $this->findByDatasouceSetting($datasource);
+            $data = $this->findByDatasourceSetting($datasource)->first();
             if (is_null($data)) {
                 continue;
             }
@@ -102,7 +102,6 @@ class DatasourcesBaseTable extends Table
         $data->databaseName = Utility\Hash::get($datasource, 'database') ?? 'none';
         $data->datasources_logs = [$this->DatasourcesLogs->getDefaultSet($datasourceName)];
 
-        //todo tablesがarrayのためdatasource_idが決まらないのでdatasourceをsave後に改めてdatasourceを読み出す必要がある
         $data->tables = $this->Tables->getDefaultSets($datasourceName);
 
         return $data;
@@ -115,6 +114,8 @@ class DatasourcesBaseTable extends Table
      */
     private function addLog($datasourceName, $target)
     {
+        $this->Tables->addLogs($target);
+
         $datasourceLog = $this->DatasourcesLogs->getDefaultSet($datasourceName);
         $datasourceLog->datasource_id = $target->id;
 
@@ -123,9 +124,9 @@ class DatasourcesBaseTable extends Table
 
     /**
      * @param $datasource
-     * @return array|\Cake\Datasource\EntityInterface|null
+     * @return \Cake\ORM\Query
      */
-    private function findByDatasouceSetting($datasource)
+    private function findByDatasourceSetting($datasource)
     {
         $targetQuery = $this->find()->where([
             'host' => Utility\Hash::get($datasource, 'host'),
@@ -135,9 +136,10 @@ class DatasourcesBaseTable extends Table
         ]);
 
 //            debug($targetQuery);
-        $data = $targetQuery->first();
-
-        return $data;
+//        $data = $targetQuery->first();
+//
+//        return $data;
+        return $targetQuery;
     }
 
 
