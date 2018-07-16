@@ -51,7 +51,7 @@ class ServersControllerTest extends IntegrationTestCase
         $this->assertResponseOk();
 
         $this->get('/servers/view');
-        $this->assertResponseCode(404);
+        $this->assertResponseError();
 
 //        $this->assertResponseNotContains('Warning');
 

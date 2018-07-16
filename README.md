@@ -1,24 +1,30 @@
+#Warning! We have not implemented the function yet.
+
 # Probe
 
-System logger for CakePHP3 Applications
+Simple status logger for CakePHP3 Applications on Windows
 
 ## Description
 
-Collect and record the following information on the server on which the CakePHP application is running.
+Collect and record the operating status of CakePHP application.
+The information to collect is as follows.
 - Storage information (drive name, capacity, usage rate, etc.)
 - Datasource information (connection status, number of records in table, etc.)
 
 ***DEMO:***
 
-![Demo](https://image-url.gif)
+There is no demo now
 
 ## Features
 
-- Awesome function
-- Awesome UI
-- ...
+- Status dashboard
+- List of storage on server running CakePHP application
+- Storage connection status and remaining capacity log
+- List of datasource on server running CakePHP application
+- Datasource connection status and Table list
+- Log number of records in table
 
-For more information, see `awesome-tool --help`.
+For more information, see `bin/cake servers --help`.
 
 ## Requirement
 
